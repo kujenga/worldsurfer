@@ -25,6 +25,11 @@
 #include <vector>
 #include <map>
 
+#include "Mesh.h"
+
+extern "C" unsigned char* stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp);
+
+
 class LightSource
 {
 public:
@@ -109,6 +114,56 @@ public:
     }
 };
 
+class TexturedMaterial : public Material
+{
+protected:
+    unsigned int textureName;
+    GLint filteringMode;
+public:
+    TexturedMaterial(const char* filename, GLint filtering = GL_LINEAR_MIPMAP_LINEAR){
+        unsigned char* data;
+        int width;
+        int height;
+        int nComponents = 4;
+        
+        data = stbi_load(filename, &width, &height, &nComponents, 0);
+        
+        if(data == NULL) return;
+        
+        if (filtering == GL_LINEAR_MIPMAP_LINEAR) {
+            if(nComponents == 4)
+                gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            else if(nComponents == 3)
+                gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+        } else {
+            glGenTextures(1, &textureName);  // id generation
+            glBindTexture(GL_TEXTURE_2D, textureName);      // binding
+            
+            if(nComponents == 4) {
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); //uploading
+            } else if(nComponents == 3) {
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data); //uploading
+            }
+        }
+        
+        delete data;
+    }
+    virtual void apply()
+    {
+        Material::apply();
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, textureName);
+        // when texture area is small, bilinear filter the closest mipmap
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+                        GL_LINEAR_MIPMAP_NEAREST );
+        // when texture area is large, bilinear filter the original
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+        glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    }
+
+};
+
+
 // Skeletal Camera class. Feel free to add custom initialization, set aspect ratio to fit viewport dimensions, or animation.
 class Camera
 {
@@ -120,6 +175,9 @@ class Camera
     
     float fov;
     float aspect;
+    
+    float2 lastMousePos;
+    float2 mouseDelta;
 public:
     float3 getEye()
     {
@@ -144,6 +202,52 @@ public:
         glLoadIdentity();
         gluLookAt(eye.x, eye.y, eye.z, eye.x+ahead.x, eye.y+ahead.y, eye.z+ahead.z, 0.0, 1.0, 0.0);
     }
+    
+    void startDrag(int x, int y) {
+        lastMousePos = float2(x, y);
+    }
+    void drag(int x, int y){
+        float2 mousePos(x, y);
+        mouseDelta = mousePos - lastMousePos;
+        lastMousePos = mousePos;
+    }
+    void endDrag(){
+        mouseDelta = float2(0, 0);
+    }
+    void move(float dt, std::vector<bool>& keysPressed) {
+        if(keysPressed.at('w'))
+            eye += ahead * dt * 20;
+        if(keysPressed.at('s'))
+            eye -= ahead * dt * 20;
+        if(keysPressed.at('a'))
+            eye -= right * dt * 20;
+        if(keysPressed.at('d'))
+            eye += right * dt * 20;
+        if(keysPressed.at('q'))
+            eye -= float3(0,1,0) * dt * 20;
+        if(keysPressed.at('e'))
+            eye += float3(0,1,0) * dt * 20;
+        
+        float yaw = atan2f( ahead.x, ahead.z );
+        float pitch = -atan2f( ahead.y,
+                              sqrtf(ahead.x * ahead.x + ahead.z * ahead.z) );
+        
+        yaw -= mouseDelta.x * 0.02f;
+        pitch += mouseDelta.y * 0.02f;
+        if(pitch > 3.14/2) pitch = 3.14/2;
+        if(pitch < -3.14/2) pitch = -3.14/2;
+        
+        mouseDelta = float2(0, 0);
+        
+        ahead = float3(sin(yaw)*cos(pitch), -sin(pitch),
+                       cos(yaw)*cos(pitch) );
+        right = ahead.cross(float3(0, 1, 0)).normalize();
+        up = right.cross(ahead);
+    }
+    void setAspectRatio(float ar)  {
+        aspect = ar;
+    }
+
 };
 
 
@@ -185,6 +289,21 @@ public:
     virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects){return false;}
 };
 
+class MeshInstance : public Object
+{
+protected:
+    Mesh *objMesh;
+public:
+    MeshInstance(Material* material, Mesh* mesh):Object(material)
+    {
+        objMesh = mesh;
+    }
+    virtual void drawModel()
+    {
+        objMesh->draw();
+    }
+};
+
 
 class Teapot : public Object
 {
@@ -202,8 +321,10 @@ class Scene
     std::vector<LightSource*> lightSources;
     std::vector<Object*> objects;
     std::vector<Material*> materials;
+    std::vector<Mesh*> meshVector;
 public:
-    Scene()
+    Scene() {}
+    Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
     {
         // BUILD YOUR SCENE HERE
         lightSources.push_back(
@@ -245,6 +366,12 @@ public:
         return camera;
     }
     
+    void initialize() {
+        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
+        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
+        objects.push_back((new MeshInstance( materials.back(), meshVector.front()))->translate(float3(10, -10, 0)) );
+    }
+    
     void draw()
     {
         camera.apply();
@@ -269,7 +396,10 @@ const int screenWidth = 600;
 const int screenHeight = 600;
 
 //scene object
-Scene scene;
+Scene scene = Scene(std::vector<Mesh*>());
+
+// vector of the keys that kaye been pressed
+std::vector<bool> keysPressed;
 
 // Displays the image.
 void onDisplay( ) {
@@ -283,7 +413,40 @@ void onDisplay( ) {
 
 void onIdle()
 {
+    double t = glutGet(GLUT_ELAPSED_TIME) * 0.001;
+    static double lastTime = 0.0;
+    double dt = t - lastTime;
+    lastTime = t;
+    
+    scene.getCamera().move(dt, keysPressed);
     glutPostRedisplay();
+}
+
+void onKeyboard(unsigned char key, int x, int y) {
+    keysPressed.at(key) = true;
+}
+
+void onKeyboardUp(unsigned char key, int x, int y) {
+    keysPressed.at(key) = false;
+}
+
+void onMouse(int button, int state, int x, int y) {
+    if(button == GLUT_LEFT_BUTTON)
+        if(state == GLUT_DOWN) {
+            scene.getCamera().startDrag(x, y);
+        } else {
+            scene.getCamera().endDrag();
+        }
+}
+
+void onMouseMotion(int x, int y) {
+    scene.getCamera().drag(x, y);
+}
+
+void onReshape(int winWidth, int winHeight) {
+    glViewport(0, 0, winWidth, winHeight);
+    scene.getCamera().setAspectRatio(
+                                     (float)winWidth/winHeight);
 }
 
 int main(int argc, char **argv) {
@@ -298,9 +461,18 @@ int main(int argc, char **argv) {
     
     glutDisplayFunc(onDisplay);					// register callback
     glutIdleFunc(onIdle);						// register callback
+    glutKeyboardFunc(onKeyboard);
+    glutKeyboardUpFunc(onKeyboardUp);
+    for(int i=0; i<256; i++)
+        keysPressed.push_back(false);
+    glutMouseFunc(onMouse);
+    glutMotionFunc(onMouseMotion);
+    glutReshapeFunc(onReshape);
     
     glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
+    
+    scene.initialize();
     
     glutMainLoop();								// launch event handling loop
     

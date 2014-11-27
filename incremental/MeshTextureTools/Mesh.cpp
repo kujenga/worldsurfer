@@ -6,10 +6,10 @@
 #include <windows.h>
 #endif // Win32 platform
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
 // Download glut from: http://www.opengl.org/resources/libraries/glut/
-#include <GL/glut.h>
+#include <GLUT/glut.h>
 
 #include "mesh.h"
 
