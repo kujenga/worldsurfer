@@ -10,6 +10,8 @@
 		863500451A272F7A008C5E66 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 863500441A272F7A008C5E66 /* main.cpp */; };
 		8635004C1A272F97008C5E66 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8635004B1A272F97008C5E66 /* GLUT.framework */; };
 		8635004E1A272F9C008C5E66 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8635004D1A272F9C008C5E66 /* OpenGL.framework */; };
+		863500601A273030008C5E66 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8635005D1A273030008C5E66 /* Mesh.cpp */; };
+		863500611A273030008C5E66 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8635005F1A273030008C5E66 /* stb_image.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +35,13 @@
 		863500541A272FEC008C5E66 /* float3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = float3.h; path = ../float3.h; sourceTree = "<group>"; };
 		863500551A272FEC008C5E66 /* float4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = float4.h; path = ../float4.h; sourceTree = "<group>"; };
 		863500561A272FEC008C5E66 /* float4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = float4x4.h; path = ../float4x4.h; sourceTree = "<group>"; };
+		863500581A273030008C5E66 /* tigger.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tigger.obj; sourceTree = "<group>"; };
+		863500591A273030008C5E66 /* tigger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tigger.png; sourceTree = "<group>"; };
+		8635005A1A273030008C5E66 /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
+		8635005B1A273030008C5E66 /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		8635005D1A273030008C5E66 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		8635005E1A273030008C5E66 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		8635005F1A273030008C5E66 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +83,31 @@
 				863500541A272FEC008C5E66 /* float3.h */,
 				863500551A272FEC008C5E66 /* float4.h */,
 				863500561A272FEC008C5E66 /* float4x4.h */,
+				863500571A273030008C5E66 /* HundredAcreWood */,
+				8635005C1A273030008C5E66 /* MeshTextureTools */,
 			);
 			path = incremental;
+			sourceTree = "<group>";
+		};
+		863500571A273030008C5E66 /* HundredAcreWood */ = {
+			isa = PBXGroup;
+			children = (
+				863500581A273030008C5E66 /* tigger.obj */,
+				863500591A273030008C5E66 /* tigger.png */,
+				8635005A1A273030008C5E66 /* tree.obj */,
+				8635005B1A273030008C5E66 /* tree.png */,
+			);
+			path = HundredAcreWood;
+			sourceTree = "<group>";
+		};
+		8635005C1A273030008C5E66 /* MeshTextureTools */ = {
+			isa = PBXGroup;
+			children = (
+				8635005D1A273030008C5E66 /* Mesh.cpp */,
+				8635005E1A273030008C5E66 /* Mesh.h */,
+				8635005F1A273030008C5E66 /* stb_image.c */,
+			);
+			path = MeshTextureTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,7 +166,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				863500601A273030008C5E66 /* Mesh.cpp in Sources */,
 				863500451A272F7A008C5E66 /* main.cpp in Sources */,
+				863500611A273030008C5E66 /* stb_image.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
