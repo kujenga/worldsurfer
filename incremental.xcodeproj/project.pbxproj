@@ -27,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8606BD8B1A306D56004B6C32 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
+		8606BD8E1A306DF2004B6C32 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
 		863500411A272F7A008C5E66 /* incremental */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = incremental; sourceTree = BUILT_PRODUCTS_DIR; };
 		863500441A272F7A008C5E66 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8635004B1A272F97008C5E66 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -79,6 +81,8 @@
 			isa = PBXGroup;
 			children = (
 				863500441A272F7A008C5E66 /* main.cpp */,
+				8606BD8B1A306D56004B6C32 /* Object.h */,
+				8606BD8E1A306DF2004B6C32 /* Material.h */,
 				863500531A272FEC008C5E66 /* float2.h */,
 				863500541A272FEC008C5E66 /* float3.h */,
 				863500551A272FEC008C5E66 /* float4.h */,
@@ -284,6 +288,7 @@
 				8635004A1A272F7A008C5E66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
