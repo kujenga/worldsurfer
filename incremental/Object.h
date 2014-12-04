@@ -109,8 +109,23 @@ protected:
 public:
     Bouncer(Material* material, Mesh* mesh) : MeshInstance(material, mesh) {}
     
+    virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects)
+    {
+        if (keysPressed.at('h')) {
+            angularVelocity = 100;
+            return true;
+        } else if (keysPressed.at('k')) {
+            angularVelocity = -100;
+            return true;
+        }
+        angularVelocity = 0;
+        return false;
+    }
+    
     virtual void move(double t, double dt)
     {
+        rotate(angularVelocity*dt);
+        
         velocity += GRAVITY*dt;
         position += velocity*dt;
         if (position.y < 0) {

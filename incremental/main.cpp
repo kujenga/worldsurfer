@@ -183,6 +183,7 @@ class Scene
     Camera camera;
     std::vector<LightSource*> lightSources;
     std::vector<Object*> objects;
+    std::vector<Object*> spawns;
     std::vector<Material*> materials;
     std::vector<Mesh*> meshVector;
 public:
@@ -257,8 +258,10 @@ public:
             objects.at(iObject)->draw();
     }
     
-    void control() {
-        
+    void control(std::vector<bool>& keysPressed) {
+        for (int i = 0; i < objects.size(); i++) {
+            objects.at(i)->control(keysPressed, spawns, objects);
+        }
     }
     
     void move(double t, double dt) {
@@ -298,7 +301,7 @@ void onIdle()
     lastTime = t;
     
     scene.getCamera().move(dt, keysPressed);
-    scene.control();
+    scene.control(keysPressed);
     scene.move(t, dt);
     glutPostRedisplay();
 }
