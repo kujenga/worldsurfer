@@ -9,6 +9,7 @@
 #ifndef __incremental__Object__
 #define __incremental__Object__
 
+#include "float4.h"
 #include "Mesh.h"
 #include "Material.h"
 
@@ -63,6 +64,24 @@ public:
     void drawModel()
     {
         glutSolidTeapot(1.0f);
+    }
+};
+
+class Ground : public Object
+{
+protected:
+    float4 origin = float4(0,0,0,0);
+public:
+    Ground(Material* material):Object(material){}
+    void drawModel()
+    {
+        glBegin(GL_TRIANGLE_FAN);
+        glVertex4d(0, 0, 0, 1);
+        glVertex4d(1, 0, 0, 0);
+        glVertex4d(0, 0, 1, 0);
+        glVertex4d(-1, 0, -1, 0);
+        glVertex4d(1, 0, 0, 0);
+        glEnd();
     }
 };
 

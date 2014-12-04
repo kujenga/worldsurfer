@@ -112,7 +112,7 @@ public:
     }
     Camera()
     {
-        eye = float3(0, 0, 5);
+        eye = float3(0, 1, 20);
         ahead = float3(0, 0, -1);
         right = float3(1, 0, 0);
         up = float3(0, 1, 0);
@@ -190,12 +190,10 @@ public:
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
     {
         // BUILD YOUR SCENE HERE
-        lightSources.push_back(
-                               new DirectionalLight(
+        lightSources.push_back(new DirectionalLight(
                                                     float3(0, 1, 0),
                                                     float3(1, 0.5, 1)));
-        lightSources.push_back(
-                               new PointLight(
+        lightSources.push_back(new PointLight(
                                               float3(-1, -1, 1),
                                               float3(0.2, 0.1, 0.1)));
         Material* yellowDiffuseMaterial = new Material();
@@ -208,8 +206,8 @@ public:
         materials.push_back(new Material());
         materials.push_back(new Material());
         
-        objects.push_back( (new Teapot( yellowDiffuseMaterial))->translate(float3(2, 0, 0)) );
-        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, -1, 2))->scale(float3(0.6, 0.6, 0.6)) );
+        objects.push_back( (new Teapot( yellowDiffuseMaterial))->translate(float3(2, 2, 0)) );
+        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, 3, 2))->scale(float3(0.6, 0.6, 0.6)) );
         objects.push_back( (new Teapot( materials.at(2) )     )->translate(float3(0, 1.2, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
         
     }
@@ -232,7 +230,15 @@ public:
     void initialize() {
         meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
         materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
-        objects.push_back((new Bouncer( materials.back(), meshVector.front()))->translate(float3(10, 15, 0)) );
+        Bouncer *tigger = new Bouncer( materials.back(), meshVector.front());
+        tigger->translate(float3(10, 15, 0));
+        tigger->scale(float3(0.5, 0.5, 0.5));
+        objects.push_back(tigger);
+        
+        Material* groundMaterial = new Material();
+        materials.push_back(groundMaterial);
+        groundMaterial->kd = float3(0.4, 1, 0.4);
+        objects.push_back(new Ground(groundMaterial));
     }
     
     void draw()
@@ -249,6 +255,10 @@ public:
         
         for (unsigned int iObject=0; iObject<objects.size(); iObject++)
             objects.at(iObject)->draw();
+    }
+    
+    void control() {
+        
     }
     
     void move(double t, double dt) {
@@ -288,6 +298,7 @@ void onIdle()
     lastTime = t;
     
     scene.getCamera().move(dt, keysPressed);
+    scene.control();
     scene.move(t, dt);
     glutPostRedisplay();
 }
