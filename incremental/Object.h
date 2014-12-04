@@ -12,6 +12,9 @@
 #include "Mesh.h"
 #include "Material.h"
 
+const float3 GRAVITY = float3(0,-10, 0);
+
+
 // Object abstract base class.
 class Object
 {
@@ -46,8 +49,11 @@ public:
         glPopMatrix();
     }
     virtual void drawModel()=0;
-    virtual void move(double t, double dt){}
-    virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects){return false;}
+    virtual void move(double t, double dt) {}
+    virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects)
+    {
+        return false;
+    }
 };
 
 class Teapot : public Object
@@ -78,13 +84,20 @@ public:
 class Bouncer : public MeshInstance
 {
 protected:
-    float3 velocity;
-    float angularVelocity;
-    float restitution;
+    float3 velocity = float3(0,0,0);
+    float angularVelocity = 0;
+    float restitution = 0.9;
 public:
+    Bouncer(Material* material, Mesh* mesh) : MeshInstance(material, mesh) {}
+    
     virtual void move(double t, double dt)
     {
-        
+        velocity += GRAVITY*dt;
+        position += velocity*dt;
+        if (position.y < 0) {
+            position.y = 0;
+            velocity.y *= -restitution;
+        }
     }
     
 };

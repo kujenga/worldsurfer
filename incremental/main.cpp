@@ -232,7 +232,7 @@ public:
     void initialize() {
         meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
         materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
-        objects.push_back((new MeshInstance( materials.back(), meshVector.front()))->translate(float3(10, -10, 0)) );
+        objects.push_back((new Bouncer( materials.back(), meshVector.front()))->translate(float3(10, 15, 0)) );
     }
     
     void draw()
@@ -249,6 +249,12 @@ public:
         
         for (unsigned int iObject=0; iObject<objects.size(); iObject++)
             objects.at(iObject)->draw();
+    }
+    
+    void move(double t, double dt) {
+        for (int i = 0; i < objects.size(); i++) {
+            objects.at(i)->move(t, dt);
+        }
     }
 };
 
@@ -282,6 +288,7 @@ void onIdle()
     lastTime = t;
     
     scene.getCamera().move(dt, keysPressed);
+    scene.move(t, dt);
     glutPostRedisplay();
 }
 
