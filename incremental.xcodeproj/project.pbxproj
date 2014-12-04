@@ -29,6 +29,9 @@
 /* Begin PBXFileReference section */
 		8606BD8B1A306D56004B6C32 /* Object.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Object.h; sourceTree = "<group>"; };
 		8606BD8E1A306DF2004B6C32 /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		8606BD8F1A3081A2004B6C32 /* Scene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		8606BD901A3081EE004B6C32 /* Camera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		8606BD911A30820C004B6C32 /* LightSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightSource.h; sourceTree = "<group>"; };
 		863500411A272F7A008C5E66 /* incremental */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = incremental; sourceTree = BUILT_PRODUCTS_DIR; };
 		863500441A272F7A008C5E66 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8635004B1A272F97008C5E66 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -83,6 +86,9 @@
 				863500441A272F7A008C5E66 /* main.cpp */,
 				8606BD8B1A306D56004B6C32 /* Object.h */,
 				8606BD8E1A306DF2004B6C32 /* Material.h */,
+				8606BD8F1A3081A2004B6C32 /* Scene.h */,
+				8606BD911A30820C004B6C32 /* LightSource.h */,
+				8606BD901A3081EE004B6C32 /* Camera.h */,
 				863500531A272FEC008C5E66 /* float2.h */,
 				863500541A272FEC008C5E66 /* float3.h */,
 				863500551A272FEC008C5E66 /* float4.h */,

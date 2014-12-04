@@ -55,6 +55,16 @@ public:
     {
         return false;
     }
+    virtual void drawShadow(float3 lightDir)
+    {
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glTranslatef(position.x, position.y, position.z);
+        glRotatef(orientationAngle, orientationAxis.x, orientationAxis.y, orientationAxis.z);
+        glScalef(scaleFactor.x, scaleFactor.y, scaleFactor.z);
+        drawModel();
+        glPopMatrix();
+    }
 };
 
 class Teapot : public Object
@@ -104,6 +114,7 @@ class Bouncer : public MeshInstance
 {
 protected:
     float3 velocity = float3(0,0,0);
+    float3 acceleration = float3(0,0,0);
     float angularVelocity = 0;
     float restitution = 0.9;
 public:
@@ -111,23 +122,35 @@ public:
     
     virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects)
     {
+        bool didControl = false;
         if (keysPressed.at('h')) {
             angularVelocity = 100;
-            return true;
-        } else if (keysPressed.at('k')) {
-            angularVelocity = -100;
-            return true;
+            didControl = true;
         }
-        angularVelocity = 0;
-        return false;
+        if (keysPressed.at('k')) {
+            angularVelocity = -100;
+            didControl = true;
+        }
+        if (keysPressed.at('u')) {
+            acceleration = float3(-cos(orientationAngle)*10, -10, sin(orientationAngle) *10);
+        } else if (keysPressed.at('j')) {
+            acceleration = float3(cos(orientationAngle)*10, -10, -sin(orientationAngle)*10);
+        } else {
+            acceleration = float3(0,0,0);
+        }
+        return didControl;
     }
     
     virtual void move(double t, double dt)
     {
         rotate(angularVelocity*dt);
+        angularVelocity *= pow(0.8, dt);
         
-        velocity += GRAVITY*dt;
-        position += velocity*dt;
+        velocity += GRAVITY*dt; // gravitational acceleration
+        velocity += acceleration*dt;
+        velocity *= pow(0.8, dt); // drag
+        
+        position += velocity*dt; // movement
         if (position.y < 0) {
             position.y = 0;
             velocity.y *= -restitution;
