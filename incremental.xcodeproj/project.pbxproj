@@ -66,6 +66,7 @@
 		86F8E3511A360AE0008958CA /* MobiusStrip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiusStrip.h; sourceTree = "<group>"; };
 		86F8E3521A360B14008958CA /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		86F8E3531A363FCE008958CA /* MeshEntity.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = MeshEntity.h; sourceTree = "<group>"; };
+		86F8E3541A3652EC008958CA /* Racer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = Racer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +195,7 @@
 				86F8E3511A360AE0008958CA /* MobiusStrip.h */,
 				86F8E3521A360B14008958CA /* Entity.h */,
 				86F8E3531A363FCE008958CA /* MeshEntity.h */,
+				86F8E3541A3652EC008958CA /* Racer.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";

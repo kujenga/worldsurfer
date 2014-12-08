@@ -16,7 +16,7 @@ class MeshEntity : public Entity {
     Mesh *objMesh;
     
 public:
-    MeshEntity(Mesh *mesh, Material* material, MobiusStrip *surface):Entity(material, surface), objMesh(mesh) {}
+    MeshEntity(Material* material, Mesh *mesh, MobiusStrip *surface):Entity(material, surface), objMesh(mesh) {}
     
     virtual void drawModel() {
         Entity::drawModel();

@@ -15,6 +15,7 @@ class Entity : public Object {
 protected:
     float3 velocity = float3(0,0,0);
     float3 acceleration = float3(0,0,0);
+    float baseRotation = 90.0;
     float restitution = 0.9;
     float drag = 0.8;
     
@@ -29,22 +30,18 @@ protected:
     
     void setGlobalPos()
     {
-        worldSurface->fillPointForAngleOffset(worldPos.x, worldPos.y, position);
         orientationAxis = worldSurface->normalForAngle(worldPos.x);
         orientationAngle = -180*worldPos.x/M_PI;
+        orientationAngle += baseRotation;
+        worldSurface->fillPointForAngleOffset(worldPos.x, worldPos.y, position);
+        position += orientationAxis.normalize() * worldPos.z;
     }
 public:
     Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {}
     
-    virtual void draw()
-    {
-        
-    }
-    
     virtual void drawModel()
     {
         worldSurface->glRotateForObjAtAngle(worldPos.x);
-        glutSolidTeapot(0.5f);
     }
     
     virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects) {
@@ -85,8 +82,8 @@ public:
         velocity *= pow(drag, dt); // drag
         
         worldPos += velocity*dt; // movement
-        if (abs(worldPos.y) > worldSurface->getRadius()/2) {
-            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? 0.5 : -0.5);
+        if (abs(worldPos.y) > worldSurface->getRadius()/4) {
+            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? 0.25 : -0.25);
             velocity.y *= -restitution;
         }
         if (worldPos.z < 0) {
@@ -96,6 +93,15 @@ public:
         
         setGlobalPos();
     }
+    
+    
+    
+    ////////////////////////////////////////////////////
+    // Accsessor Methods (for camera placement)
+    ////////////////////////////////////////////////////
+    float3 globalPosition() { return position + worldSurface->normalForAngle(worldPos.x)*5 - worldSurface->dirVector(worldPos.x)*5; }
+    float3 aheadDirection() { return worldSurface->dirVector(worldPos.x); }
+    float3 upDirection() { return worldSurface->normalForAngle(worldPos.x); }
 };
 
 #endif

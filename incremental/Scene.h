@@ -15,6 +15,10 @@
 #include "MobiusStrip.h"
 #include "Entity.h"
 #include "MeshEntity.h"
+#include "Racer.h"
+
+#define WORLD_RADIUS 12
+#define WORLD_WIDTH 5
 
 class Scene
 {
@@ -26,6 +30,7 @@ class Scene
     std::vector<Mesh*> meshVector;
     
     MobiusStrip *worldGround;
+    Entity *player;
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
@@ -33,8 +38,8 @@ public:
         // BUILD YOUR SCENE HERE
         lightSources.push_back(new DirectionalLight(float3(5, 10, 5),
                                                     float3(1, 0.5, 1)));
-        lightSources.push_back(new PointLight(float3(-1, -1, 1),
-                                              float3(2, 1, 1)));
+        lightSources.push_back(new PointLight(float3(0, -5, 0),
+                                              float3(4, 5, 4)));
         Material* yellowDiffuseMaterial = new Material();
         materials.push_back(yellowDiffuseMaterial);
         yellowDiffuseMaterial->kd = float3(1, 1, 0);
@@ -49,7 +54,7 @@ public:
 //        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, 3, 2))->scale(float3(0.6, 0.6, 0.6)) );
         
         // Mobius Strip ground
-        worldGround = new MobiusStrip(materials.at(4), 12, 6);
+        worldGround = new MobiusStrip(materials.at(4), WORLD_RADIUS, WORLD_WIDTH);
         objects.push_back(worldGround->scale(float3(1,1,1)));
         
     }
@@ -70,24 +75,39 @@ public:
     }
     
     void initialize() {
-        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
+//        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
         
         meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
         materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
-        MeshEntity *tigger = new MeshEntity(meshVector.front(), materials.back(), worldGround);
-        tigger->translate(float3(10, 15, 0));
-        tigger->scale(float3(0.5, 0.5, 0.5));
-        objects.push_back(tigger);
+        
+        player = new MeshEntity(materials.back(), meshVector.front(), worldGround);
+        player->scale(float3(0.3, 0.3, 0.3));
+        objects.push_back(player);
         
         // simple Car object
-//        Material *carMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png");
-//        materials.push_back(carMatr);
-//        MeshInstance *chassis = new MeshInstance("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj");
-//        meshVector.push_back(chassis);
 //        MeshInstance *chassis = new MeshInstance( carMatr, meshVector.back());
 //        chassis->translate(float3(-10, 10, 0));
 //        chassis->scale(float3(0.5, 0.5, 0.5));
 //        objects.push_back(chassis);
+        
+        // Creates the other car racers
+        Material *carMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png");
+        materials.push_back(carMatr);
+        Mesh *chassisMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj");
+        meshVector.push_back(chassisMesh);
+        for (int i = 0; i < 5; i++) {
+            objects.push_back((new MeshEntity(carMatr, chassisMesh, worldGround))->scale(float3(0.2, 0.2, 0.2)));
+        }
+        
+        
+        // Creates trees surrounding the mobius track
+        Material *treeMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tree.png");
+        materials.push_back(treeMatr);
+        Mesh *treeMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tree.obj");
+        meshVector.push_back(treeMesh);
+        for (float a = 0; a < 2*M_PI; a += M_PI_2) {
+            objects.push_back((new MeshInstance(treeMatr, treeMesh))->translate(worldGround->pointForAngleOffset(a, 0)*3));
+        }
     }
     
     void draw()
@@ -102,17 +122,22 @@ public:
         for (; iLightSource<GL_MAX_LIGHTS; iLightSource++)
             glDisable(GL_LIGHT0 + iLightSource);
         
-        glDisable(GL_LIGHTING);
-        glDisable(GL_TEXTURE_2D);
-        glColor3d(0, 0, 0);
-        for (iLightSource=0; iLightSource<lightSources.size(); iLightSource++)
-            for (unsigned int iObject=0; iObject<objects.size(); iObject++)
-                objects.at(iObject)->drawShadow(lightSources.at(iLightSource)->getLightDirAt(objects.at(iObject)->getPosition()));
-        glEnable(GL_TEXTURE_2D);
-        glEnable(GL_LIGHTING);
+//        glDisable(GL_LIGHTING);
+//        glDisable(GL_TEXTURE_2D);
+//        glColor3d(0, 0, 0);
+//        for (iLightSource=0; iLightSource<lightSources.size(); iLightSource++)
+//            for (unsigned int iObject=0; iObject<objects.size(); iObject++)
+//                objects.at(iObject)->drawShadow(lightSources.at(iLightSource)->getLightDirAt(objects.at(iObject)->getPosition()));
+//        glEnable(GL_TEXTURE_2D);
+//        glEnable(GL_LIGHTING);
         
         for (unsigned int iObject=0; iObject<objects.size(); iObject++)
             objects.at(iObject)->draw();
+        
+        // player-oriented camera transformations
+        camera.setEye(player->globalPosition());
+        camera.setAhead(player->aheadDirection());
+        camera.setUpDir(player->upDirection());
     }
     
     void control(std::vector<bool>& keysPressed) {

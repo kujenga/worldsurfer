@@ -17,7 +17,7 @@ class MobiusStrip : public Object {
     float width = 1.0;
 public:
     MobiusStrip(Material* material):Object(material){}
-    MobiusStrip(Material* material, float r, float w):Object(material), radius(r), width(w) {}
+    MobiusStrip(Material* material, float r, float w):Object(material), radius(r), width(2*w) {}
     
     const float getRadius() { return radius; }
     
@@ -27,7 +27,12 @@ public:
         pt.y = r/2 *sin(a/2);
         pt.z = sin(a)* ( radius+ (r/2 * cos(a/2)) );
     }
-    
+    float3 pointForAngleOffset(float a, float r)
+    {
+        float3 pt;
+        fillPointForAngleOffset(a, r, pt);
+        return pt;
+    }
     float3 normalForAngle(float a)
     {
         float3 base;
@@ -38,10 +43,17 @@ public:
         fillPointForAngleOffset(a+0.01, width/2, p2);
         return (p1 - base).cross(base - p2);
     }
-
+    // the forward direction of that point on the strip
+    float3 dirVector(float a)
+    {
+        return float3(-sinf(a), 0, cosf(a));
+    }
+    // the rotation amount on the specified strip location
+    float worldRotation(float a) { return 90*a/M_PI; }
+    // performs an openGL rotation on the current matrix, used by entities to adjust their position to the world surface
     void glRotateForObjAtAngle(float a)
     {
-        glRotatef(90*a/M_PI, -sinf(a), 0, cosf(a));
+        glRotatef(worldRotation(a), -sinf(a), 0, cosf(a));
     }
     
     void drawModel()
