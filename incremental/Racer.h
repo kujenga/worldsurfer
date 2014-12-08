@@ -13,13 +13,13 @@
 
 class Racer : public Object {
 protected:
-    float3 velocity = float3(0,0,0);
+    float3 velocity = float3(1,0,0);
     float acceleration = 0;
     float restitution = 0.9;
     float drag = 0.8;
     
     // dimensions are x forward, y left and right, z forward
-    float3 worldPos = float3(0,0,0);
+    float3 worldPos = float3(0,0,1);
     MobiusStrip *worldSurface;
     
     float3 gravity()
@@ -31,13 +31,14 @@ protected:
     {
         worldSurface->fillPointForAngleOffset(worldPos.x, worldPos.y, position);
         orientationAxis = worldSurface->normalForAngle(worldPos.x);
-        orientationAngle = 90;
+        orientationAngle = -180*worldPos.x/M_PI;
     }
 public:
     Racer(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {}
     
     void drawModel()
     {
+        worldSurface->glRotateForObjAtAngle(worldPos.x);
         glutSolidTeapot(1.0f);
     }
     

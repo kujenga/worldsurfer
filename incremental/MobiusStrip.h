@@ -36,6 +36,11 @@ public:
         fillPointForAngleOffset(a+0.01, width/2, p2);
         return (p1 - base).cross(base - p2);
     }
+
+    void glRotateForObjAtAngle(float a)
+    {
+        glRotatef(90*a/M_PI, -sinf(a), 0, cosf(a));
+    }
     
     void drawModel()
     {
