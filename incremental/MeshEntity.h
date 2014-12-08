@@ -13,8 +13,8 @@
 #include "Mesh.h"
 
 class MeshEntity : public Entity {
+protected:
     Mesh *objMesh;
-    
 public:
     MeshEntity(Material* material, Mesh *mesh, MobiusStrip *surface):Entity(material, surface), objMesh(mesh) {}
     
@@ -63,13 +63,59 @@ public:
     }
 };
 
-class Racer : public MeshEntity {
+class Wheel : public MeshEntity {
     
+public:
+    Wheel(Material* material, Mesh *mesh, MobiusStrip *surface) : MeshEntity(material, mesh, surface) {
+        scale(float3(5,5,5));
+    }
+    
+    void drawModel() {
+        objMesh->draw();
+    }
+    
+    void setBaseOffset(float3 pos) { baseOffset = pos; }
+    
+    void spin()
+    {
+        // needs implementation
+    }
+};
+
+class Racer : public MeshEntity {
+    Mesh *wheelMesh;
+    Wheel *w1;
+    Wheel *w2;
+    Wheel *w3;
+    Wheel *w4;
 public:
     Racer(Material* material, Mesh *mesh, MobiusStrip *surface) : MeshEntity(material, mesh, surface) {
         acceleration.x = 0.5;
+        
+        wheelMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/wheel.obj");
+        w1 = new Wheel(material, wheelMesh, surface);
+        w1->setBaseOffset(float3(1, 1, 0));
+        w2 = new Wheel(material, wheelMesh, surface);
+        w3 = new Wheel(material, wheelMesh, surface);
+        w4 = new Wheel(material, wheelMesh, surface);
+    }
+    ~Racer()
+    {
+        delete wheelMesh;
+        delete w1;
+        delete w2;
+        delete w3;
+        delete w4;
     }
     void setStartDist(float dist) { worldPos.x = dist; }
+    
+    virtual void drawModel() {
+        //MeshEntity::drawModel();
+        w1->drawModel();
+        w2->drawModel();
+        w3->drawModel();
+        w4->drawModel();
+    }
 };
 
 #endif

@@ -24,7 +24,7 @@ class Camera
     float2 lastMousePos;
     float2 mouseDelta;
 public:
-    bool globalView = false;
+    bool globalView = true;
     
     void setAhead(float3 dir) { ahead = dir; }
     void setEye(float3 pos) { eye = pos; }
@@ -36,7 +36,7 @@ public:
     }
     Camera()
     {
-        eye = float3(0, 20, 100);
+        eye = float3(0, 5, 20);
         ahead = float3(0, 0, -1);
         right = float3(1, 0, 0);
         up = float3(0, 1, 0);

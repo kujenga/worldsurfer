@@ -31,7 +31,7 @@ class Scene
     MobiusStrip *worldGround;
     Entity *player;
     
-    bool globalCamera = false;
+    bool globalCamera = true;
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)

@@ -15,9 +15,11 @@ class Entity : public Object {
 protected:
     float3 velocity = float3(0,0,0);
     float3 acceleration = float3(0,0,0);
-    float baseRotation = 0.0;
     float restitution = 0.9;
     float drag = 0.8;
+    
+    float baseRotation = 0.0;
+    float3 baseOffset = float3(0,0,0);
     
     // dimensions are x forward, y left and right, z up
     float3 worldPos = float3(0,0,1);
@@ -33,8 +35,10 @@ protected:
         orientationAxis = worldSurface->normalForAngle(worldPos.x);
         orientationAngle = -180*worldPos.x/M_PI;
         orientationAngle += baseRotation;
+        // transform world position to the global position
         worldSurface->fillPointForAngleOffset(worldPos.x, worldPos.y, position);
-        position += orientationAxis.normalize() * worldPos.z;
+        // add in base position and height
+        position += baseOffset + orientationAxis.normalize() * worldPos.z;
     }
 public:
     Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {
