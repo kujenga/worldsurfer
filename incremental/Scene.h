@@ -86,6 +86,15 @@ public:
         for (; iLightSource<GL_MAX_LIGHTS; iLightSource++)
             glDisable(GL_LIGHT0 + iLightSource);
         
+        glDisable(GL_LIGHTING);
+        glDisable(GL_TEXTURE_2D);
+        glColor3d(0, 0, 0);
+        for (iLightSource=0; iLightSource<lightSources.size(); iLightSource++)
+            for (unsigned int iObject=0; iObject<objects.size(); iObject++)
+                objects.at(iObject)->drawShadow(lightSources.at(iLightSource)->getLightDirAt(objects.at(iObject)->getPosition()));
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_LIGHTING);
+        
         for (unsigned int iObject=0; iObject<objects.size(); iObject++)
             objects.at(iObject)->draw();
     }

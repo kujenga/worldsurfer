@@ -47,6 +47,22 @@
 		8635005D1A273030008C5E66 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		8635005E1A273030008C5E66 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		8635005F1A273030008C5E66 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		86F8E33D1A35C189008958CA /* chassis.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chassis.obj; sourceTree = "<group>"; };
+		86F8E33E1A35C189008958CA /* chevy.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chevy.obj; sourceTree = "<group>"; };
+		86F8E33F1A35C189008958CA /* chevy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevy.png; sourceTree = "<group>"; };
+		86F8E3401A35C189008958CA /* wheel.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wheel.obj; sourceTree = "<group>"; };
+		86F8E3421A35C189008958CA /* heli.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = heli.obj; sourceTree = "<group>"; };
+		86F8E3431A35C189008958CA /* heli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heli.png; sourceTree = "<group>"; };
+		86F8E3441A35C189008958CA /* heliait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heliait.png; sourceTree = "<group>"; };
+		86F8E3451A35C189008958CA /* mainrotor.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mainrotor.obj; sourceTree = "<group>"; };
+		86F8E3461A35C189008958CA /* tailrotor.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tailrotor.obj; sourceTree = "<group>"; };
+		86F8E3481A35C189008958CA /* balloon.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = balloon.obj; sourceTree = "<group>"; };
+		86F8E3491A35C189008958CA /* balloon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = balloon.png; sourceTree = "<group>"; };
+		86F8E34A1A35C189008958CA /* smoothtree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = smoothtree.obj; sourceTree = "<group>"; };
+		86F8E34B1A35C189008958CA /* thunderbolt_airscrew.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thunderbolt_airscrew.obj; sourceTree = "<group>"; };
+		86F8E34C1A35C189008958CA /* thunderbolt_body.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thunderbolt_body.obj; sourceTree = "<group>"; };
+		86F8E34D1A35C189008958CA /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
+		86F8E34E1A35C189008958CA /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +78,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8606BD921A30825A004B6C32 /* coordinates */ = {
+			isa = PBXGroup;
+			children = (
+				863500531A272FEC008C5E66 /* float2.h */,
+				863500541A272FEC008C5E66 /* float3.h */,
+				863500551A272FEC008C5E66 /* float4.h */,
+				863500561A272FEC008C5E66 /* float4x4.h */,
+			);
+			name = coordinates;
+			sourceTree = "<group>";
+		};
 		863500381A272F7A008C5E66 = {
 			isa = PBXGroup;
 			children = (
@@ -89,12 +116,12 @@
 				8606BD8F1A3081A2004B6C32 /* Scene.h */,
 				8606BD911A30820C004B6C32 /* LightSource.h */,
 				8606BD901A3081EE004B6C32 /* Camera.h */,
-				863500531A272FEC008C5E66 /* float2.h */,
-				863500541A272FEC008C5E66 /* float3.h */,
-				863500551A272FEC008C5E66 /* float4.h */,
-				863500561A272FEC008C5E66 /* float4x4.h */,
+				8606BD921A30825A004B6C32 /* coordinates */,
 				863500571A273030008C5E66 /* HundredAcreWood */,
 				8635005C1A273030008C5E66 /* MeshTextureTools */,
+				86F8E33C1A35C189008958CA /* chevy */,
+				86F8E3411A35C189008958CA /* heli */,
+				86F8E3471A35C189008958CA /* models */,
 			);
 			path = incremental;
 			sourceTree = "<group>";
@@ -118,6 +145,43 @@
 				8635005F1A273030008C5E66 /* stb_image.c */,
 			);
 			path = MeshTextureTools;
+			sourceTree = "<group>";
+		};
+		86F8E33C1A35C189008958CA /* chevy */ = {
+			isa = PBXGroup;
+			children = (
+				86F8E33D1A35C189008958CA /* chassis.obj */,
+				86F8E33E1A35C189008958CA /* chevy.obj */,
+				86F8E33F1A35C189008958CA /* chevy.png */,
+				86F8E3401A35C189008958CA /* wheel.obj */,
+			);
+			path = chevy;
+			sourceTree = "<group>";
+		};
+		86F8E3411A35C189008958CA /* heli */ = {
+			isa = PBXGroup;
+			children = (
+				86F8E3421A35C189008958CA /* heli.obj */,
+				86F8E3431A35C189008958CA /* heli.png */,
+				86F8E3441A35C189008958CA /* heliait.png */,
+				86F8E3451A35C189008958CA /* mainrotor.obj */,
+				86F8E3461A35C189008958CA /* tailrotor.obj */,
+			);
+			path = heli;
+			sourceTree = "<group>";
+		};
+		86F8E3471A35C189008958CA /* models */ = {
+			isa = PBXGroup;
+			children = (
+				86F8E3481A35C189008958CA /* balloon.obj */,
+				86F8E3491A35C189008958CA /* balloon.png */,
+				86F8E34A1A35C189008958CA /* smoothtree.obj */,
+				86F8E34B1A35C189008958CA /* thunderbolt_airscrew.obj */,
+				86F8E34C1A35C189008958CA /* thunderbolt_body.obj */,
+				86F8E34D1A35C189008958CA /* tree.obj */,
+				86F8E34E1A35C189008958CA /* tree.png */,
+			);
+			path = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -37,12 +37,13 @@ public:
     Object* rotate(float angle){
         orientationAngle += angle; return this;
     }
+    const float3 getPosition() { return position; }
     virtual void draw()
     {
-        material->apply();
         // apply scaling, translation and orientation
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
+        material->apply();
         glTranslatef(position.x, position.y, position.z);
         glRotatef(orientationAngle, orientationAxis.x, orientationAxis.y, orientationAxis.z);
         glScalef(scaleFactor.x, scaleFactor.y, scaleFactor.z);
@@ -59,6 +60,13 @@ public:
     {
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
+        // scale down to shadow shape
+        
+        lightDir.x = lightDir.x * position.y/lightDir.y;
+        lightDir.z = lightDir.z * position.y/lightDir.y;
+        glTranslatef(lightDir.x, 0.2, lightDir.z);
+        glScalef(1, 0, 1);
+        
         glTranslatef(position.x, position.y, position.z);
         glRotatef(orientationAngle, orientationAxis.x, orientationAxis.y, orientationAxis.z);
         glScalef(scaleFactor.x, scaleFactor.y, scaleFactor.z);
@@ -93,6 +101,7 @@ public:
         glVertex4d(1, 0, 0, 0);
         glEnd();
     }
+    virtual void drawShadow(float3 lightDir) {}
 };
 
 class MeshInstance : public Object
@@ -132,9 +141,9 @@ public:
             didControl = true;
         }
         if (keysPressed.at('u')) {
-            acceleration = float3(-cos(orientationAngle)*10, -10, sin(orientationAngle) *10);
+            acceleration = float3(-cos(orientationAngle/365)*10, -10, sin(orientationAngle/365) *10);
         } else if (keysPressed.at('j')) {
-            acceleration = float3(cos(orientationAngle)*10, -10, -sin(orientationAngle)*10);
+            acceleration = float3(cos(orientationAngle/365)*10, -10, -sin(orientationAngle/365)*10);
         } else {
             acceleration = float3(0,0,0);
         }
