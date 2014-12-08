@@ -12,6 +12,8 @@
 #include "Camera.h"
 #include "LightSource.h"
 #include "Object.h"
+#include "MobiusStrip.h"
+#include "Racer.h"
 
 class Scene
 {
@@ -21,15 +23,17 @@ class Scene
     std::vector<Object*> spawns;
     std::vector<Material*> materials;
     std::vector<Mesh*> meshVector;
+    
+    MobiusStrip *worldGround;
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
     {
         // BUILD YOUR SCENE HERE
-        lightSources.push_back(new DirectionalLight(float3(0, 1, 0),
+        lightSources.push_back(new DirectionalLight(float3(5, 10, 5),
                                                     float3(1, 0.5, 1)));
         lightSources.push_back(new PointLight(float3(-1, -1, 1),
-                                              float3(0.2, 0.1, 0.1)));
+                                              float3(2, 1, 1)));
         Material* yellowDiffuseMaterial = new Material();
         materials.push_back(yellowDiffuseMaterial);
         yellowDiffuseMaterial->kd = float3(1, 1, 0);
@@ -40,10 +44,14 @@ public:
         materials.push_back(new Material());
         materials.push_back(new Material());
         
-        objects.push_back( (new Teapot( yellowDiffuseMaterial))->translate(float3(2, 2, 0)) );
-        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, 3, 2))->scale(float3(0.6, 0.6, 0.6)) );
-        objects.push_back( (new Teapot( materials.at(2) )     )->translate(float3(0, 1.2, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
+//        objects.push_back( (new Teapot( yellowDiffuseMaterial))->translate(float3(2, 2, 0)) );
+//        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, 3, 2))->scale(float3(0.6, 0.6, 0.6)) );
         
+        // Mobius Strip ground
+        worldGround = new MobiusStrip(materials.at(4), 12, 6);
+        objects.push_back(worldGround->scale(float3(1,1,1)));
+        
+        objects.push_back((new Racer(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
     }
     ~Scene()
     {
@@ -62,26 +70,22 @@ public:
     }
     
     void initialize() {
-        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
-        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
-        Bouncer *tigger = new Bouncer( materials.back(), meshVector.front());
-        tigger->translate(float3(10, 15, 0));
-        tigger->scale(float3(0.5, 0.5, 0.5));
-        objects.push_back(tigger);
+//        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
+//        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
+//        Bouncer *tigger = new Bouncer( materials.back(), meshVector.front());
+//        tigger->translate(float3(10, 15, 0));
+//        tigger->scale(float3(0.5, 0.5, 0.5));
+//        objects.push_back(tigger);
         
         // simple Car object
-        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png"));
-        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj"));
-        MeshInstance *chassis = new MeshInstance( materials.back(), meshVector.back());
-        chassis->translate(float3(-10, 0, 0));
-        chassis->scale(float3(0.5, 0.5, 0.5));
-        objects.push_back(chassis);
-        
-        // Mobius Strip ground
-        Material* groundMaterial = new Material();
-        materials.push_back(groundMaterial);
-        groundMaterial->kd = float3(0.4, 1, 0.4);
-        objects.push_back((new Ground(groundMaterial))->scale(float3(50,50,50)));
+//        Material *carMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png");
+//        materials.push_back(carMatr);
+//        MeshInstance *chassis = new MeshInstance("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj");
+//        meshVector.push_back(chassis);
+//        MeshInstance *chassis = new MeshInstance( carMatr, meshVector.back());
+//        chassis->translate(float3(-10, 10, 0));
+//        chassis->scale(float3(0.5, 0.5, 0.5));
+//        objects.push_back(chassis);
     }
     
     void draw()

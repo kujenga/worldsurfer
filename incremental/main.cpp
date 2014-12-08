@@ -20,12 +20,10 @@
 // Download glut from: http://www.opengl.org/resources/libraries/glut/
 #include <GLUT/glut.h>
 
-#include "float2.h"
 #include "float3.h"
 #include <vector>
 #include <map>
 
-#include "Object.h"
 #include "Material.h"
 #include "Mesh.h"
 #include "Scene.h"
@@ -115,6 +113,7 @@ int main(int argc, char **argv) {
     
     glEnable(GL_LIGHTING);
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_NORMALIZE);
     
     scene.initialize();
     

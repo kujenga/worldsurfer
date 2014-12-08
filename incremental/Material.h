@@ -25,6 +25,7 @@ public:
     }
     virtual void apply()
     {
+         glDisable(GL_TEXTURE_2D);
         float aglDiffuse[] = {kd.x, kd.y, kd.z, 1.0f};
         glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, aglDiffuse);
         float aglSpecular[] = {kd.x, kd.y, kd.z, 1.0f};

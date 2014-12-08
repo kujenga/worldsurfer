@@ -36,7 +36,6 @@
 		863500441A272F7A008C5E66 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8635004B1A272F97008C5E66 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		8635004D1A272F9C008C5E66 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		863500531A272FEC008C5E66 /* float2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float2.h; sourceTree = "<group>"; };
 		863500541A272FEC008C5E66 /* float3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float3.h; sourceTree = "<group>"; };
 		863500551A272FEC008C5E66 /* float4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float4.h; sourceTree = "<group>"; };
 		863500561A272FEC008C5E66 /* float4x4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float4x4.h; sourceTree = "<group>"; };
@@ -63,6 +62,9 @@
 		86F8E34C1A35C189008958CA /* thunderbolt_body.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = thunderbolt_body.obj; sourceTree = "<group>"; };
 		86F8E34D1A35C189008958CA /* tree.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tree.obj; sourceTree = "<group>"; };
 		86F8E34E1A35C189008958CA /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
+		86F8E3501A35E31D008958CA /* float2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float2.h; sourceTree = "<group>"; };
+		86F8E3511A360AE0008958CA /* MobiusStrip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiusStrip.h; sourceTree = "<group>"; };
+		86F8E3521A360B14008958CA /* Racer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Racer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,7 +83,7 @@
 		8606BD921A30825A004B6C32 /* coordinates */ = {
 			isa = PBXGroup;
 			children = (
-				863500531A272FEC008C5E66 /* float2.h */,
+				86F8E3501A35E31D008958CA /* float2.h */,
 				863500541A272FEC008C5E66 /* float3.h */,
 				863500551A272FEC008C5E66 /* float4.h */,
 				863500561A272FEC008C5E66 /* float4x4.h */,
@@ -111,9 +113,9 @@
 			isa = PBXGroup;
 			children = (
 				863500441A272F7A008C5E66 /* main.cpp */,
-				8606BD8B1A306D56004B6C32 /* Object.h */,
-				8606BD8E1A306DF2004B6C32 /* Material.h */,
 				8606BD8F1A3081A2004B6C32 /* Scene.h */,
+				86F8E34F1A35DBE6008958CA /* objects */,
+				8606BD8E1A306DF2004B6C32 /* Material.h */,
 				8606BD911A30820C004B6C32 /* LightSource.h */,
 				8606BD901A3081EE004B6C32 /* Camera.h */,
 				8606BD921A30825A004B6C32 /* coordinates */,
@@ -182,6 +184,16 @@
 				86F8E34E1A35C189008958CA /* tree.png */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		86F8E34F1A35DBE6008958CA /* objects */ = {
+			isa = PBXGroup;
+			children = (
+				8606BD8B1A306D56004B6C32 /* Object.h */,
+				86F8E3511A360AE0008958CA /* MobiusStrip.h */,
+				86F8E3521A360B14008958CA /* Racer.h */,
+			);
+			name = objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
