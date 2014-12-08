@@ -69,10 +69,19 @@ public:
         tigger->scale(float3(0.5, 0.5, 0.5));
         objects.push_back(tigger);
         
+        // simple Car object
+        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png"));
+        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj"));
+        MeshInstance *chassis = new MeshInstance( materials.back(), meshVector.back());
+        chassis->translate(float3(-10, 0, 0));
+        chassis->scale(float3(0.5, 0.5, 0.5));
+        objects.push_back(chassis);
+        
+        // Mobius Strip ground
         Material* groundMaterial = new Material();
         materials.push_back(groundMaterial);
         groundMaterial->kd = float3(0.4, 1, 0.4);
-        objects.push_back((new MoebiusStrip(groundMaterial))->scale(float3(50,50,50)));
+        objects.push_back((new Ground(groundMaterial))->scale(float3(50,50,50)));
     }
     
     void draw()
