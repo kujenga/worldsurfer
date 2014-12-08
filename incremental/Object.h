@@ -13,8 +13,7 @@
 #include "Mesh.h"
 #include "Material.h"
 
-const float3 GRAVITY = float3(0,-10, 0);
-
+const float3 VERT_GRAVITY = float3(0,-10, 0);
 
 // Object abstract base class.
 class Object
@@ -131,7 +130,7 @@ public:
         rotate(angularVelocity*dt);
         angularVelocity *= pow(0.8, dt);
         
-        velocity += GRAVITY*dt; // gravitational acceleration
+        velocity += VERT_GRAVITY*dt; // gravitational acceleration
         velocity += acceleration*dt;
         velocity *= pow(0.8, dt); // drag
         

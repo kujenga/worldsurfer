@@ -14,6 +14,7 @@
 #include "Object.h"
 #include "MobiusStrip.h"
 #include "Entity.h"
+#include "MeshEntity.h"
 
 class Scene
 {
@@ -51,7 +52,6 @@ public:
         worldGround = new MobiusStrip(materials.at(4), 12, 6);
         objects.push_back(worldGround->scale(float3(1,1,1)));
         
-        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
     }
     ~Scene()
     {
@@ -70,12 +70,14 @@ public:
     }
     
     void initialize() {
-//        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
-//        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
-//        Bouncer *tigger = new Bouncer( materials.back(), meshVector.front());
-//        tigger->translate(float3(10, 15, 0));
-//        tigger->scale(float3(0.5, 0.5, 0.5));
-//        objects.push_back(tigger);
+        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
+        
+        meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
+        materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
+        MeshEntity *tigger = new MeshEntity(meshVector.front(), materials.back(), worldGround);
+        tigger->translate(float3(10, 15, 0));
+        tigger->scale(float3(0.5, 0.5, 0.5));
+        objects.push_back(tigger);
         
         // simple Car object
 //        Material *carMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png");

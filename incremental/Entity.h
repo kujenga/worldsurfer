@@ -36,7 +36,12 @@ protected:
 public:
     Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {}
     
-    void drawModel()
+    virtual void draw()
+    {
+        
+    }
+    
+    virtual void drawModel()
     {
         worldSurface->glRotateForObjAtAngle(worldPos.x);
         glutSolidTeapot(0.5f);
@@ -80,8 +85,8 @@ public:
         velocity *= pow(drag, dt); // drag
         
         worldPos += velocity*dt; // movement
-        if (abs(worldPos.y) > worldSurface->getRadius()) {
-            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? 1 : -1);
+        if (abs(worldPos.y) > worldSurface->getRadius()/2) {
+            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? 0.5 : -0.5);
             velocity.y *= -restitution;
         }
         if (worldPos.z < 0) {

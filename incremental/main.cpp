@@ -73,12 +73,13 @@ void onKeyboardUp(unsigned char key, int x, int y) {
 }
 
 void onMouse(int button, int state, int x, int y) {
-    if(button == GLUT_LEFT_BUTTON)
+    if(button == GLUT_LEFT_BUTTON) {
         if(state == GLUT_DOWN) {
             scene.getCamera().startDrag(x, y);
         } else {
             scene.getCamera().endDrag();
         }
+    }
 }
 
 void onMouseMotion(int x, int y) {
