@@ -24,6 +24,8 @@ class Camera
     float2 lastMousePos;
     float2 mouseDelta;
 public:
+    bool globalView = false;
+    
     void setAhead(float3 dir) { ahead = dir; }
     void setEye(float3 pos) { eye = pos; }
     void setUpDir(float3 dir) { up = dir; }
@@ -64,34 +66,36 @@ public:
         mouseDelta = float2(0, 0);
     }
     void move(float dt, std::vector<bool>& keysPressed) {
-//        if(keysPressed.at('w'))
-//            eye += ahead * dt * 20;
-//        if(keysPressed.at('s'))
-//            eye -= ahead * dt * 20;
-//        if(keysPressed.at('a'))
-//            eye -= right * dt * 20;
-//        if(keysPressed.at('d'))
-//            eye += right * dt * 20;
-//        if(keysPressed.at('q'))
-//            eye -= float3(0,1,0) * dt * 20;
-//        if(keysPressed.at('e'))
-//            eye += float3(0,1,0) * dt * 20;
-//        
-//        float yaw = atan2f( ahead.x, ahead.z );
-//        float pitch = -atan2f( ahead.y,
-//                              sqrtf(ahead.x * ahead.x + ahead.z * ahead.z) );
-//        
-//        yaw -= mouseDelta.x * 0.02f;
-//        pitch += mouseDelta.y * 0.02f;
-//        if(pitch > 3.14/2) pitch = 3.14/2;
-//        if(pitch < -3.14/2) pitch = -3.14/2;
-//        
-//        mouseDelta = float2(0, 0);
-//        
-//        ahead = float3(sin(yaw)*cos(pitch), -sin(pitch),
-//                       cos(yaw)*cos(pitch) );
-//        right = ahead.cross(float3(0, 1, 0)).normalize();
-//        up = right.cross(ahead);
+        if (globalView) {
+            if(keysPressed.at('w'))
+                eye += ahead * dt * 20;
+            if(keysPressed.at('s'))
+                eye -= ahead * dt * 20;
+            if(keysPressed.at('a'))
+                eye -= right * dt * 20;
+            if(keysPressed.at('d'))
+                eye += right * dt * 20;
+            if(keysPressed.at('q'))
+                eye -= float3(0,1,0) * dt * 20;
+            if(keysPressed.at('e'))
+                eye += float3(0,1,0) * dt * 20;
+            
+            float yaw = atan2f( ahead.x, ahead.z );
+            float pitch = -atan2f( ahead.y,
+                                  sqrtf(ahead.x * ahead.x + ahead.z * ahead.z) );
+            
+            yaw -= mouseDelta.x * 0.02f;
+            pitch += mouseDelta.y * 0.02f;
+            if(pitch > 3.14/2) pitch = 3.14/2;
+            if(pitch < -3.14/2) pitch = -3.14/2;
+            
+            mouseDelta = float2(0, 0);
+            
+            ahead = float3(sin(yaw)*cos(pitch), -sin(pitch),
+                           cos(yaw)*cos(pitch) );
+            right = ahead.cross(float3(0, 1, 0)).normalize();
+            up = right.cross(ahead);
+        }
     }
     void setAspectRatio(float ar)  {
         aspect = ar;

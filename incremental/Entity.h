@@ -15,7 +15,7 @@ class Entity : public Object {
 protected:
     float3 velocity = float3(0,0,0);
     float3 acceleration = float3(0,0,0);
-    float baseRotation = 90.0;
+    float baseRotation = 0.0;
     float restitution = 0.9;
     float drag = 0.8;
     
@@ -37,42 +37,13 @@ protected:
         position += orientationAxis.normalize() * worldPos.z;
     }
 public:
-    Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {}
+    Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {
+        scale(float3(0.1, 0.1, 0.1));
+    }
     
     virtual void drawModel()
     {
         worldSurface->glRotateForObjAtAngle(worldPos.x);
-    }
-    
-    virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects) {
-        // forward and back movement
-        if (keysPressed.at('i')) {
-            acceleration.x = 1;
-            return true;
-        } else if (keysPressed.at('k')) {
-            acceleration.x = -1;
-            return true;
-        } else {
-            acceleration.x = 0;
-        }
-        // left and right movement
-        if (keysPressed.at('j')) {
-            acceleration.y = 1;
-            return true;
-        } else if (keysPressed.at('l')) {
-            acceleration.y = -1;
-            return true;
-        } else {
-            acceleration.y = 0;
-        }
-        // hop movement
-        if (keysPressed.at(' ')) {
-            acceleration.z = 1;
-            return true;
-        } else {
-            acceleration.z = 0;
-        }
-        return false;
     }
     
     virtual void move(double t, double dt)
@@ -99,7 +70,7 @@ public:
     ////////////////////////////////////////////////////
     // Accsessor Methods (for camera placement)
     ////////////////////////////////////////////////////
-    float3 globalPosition() { return position + worldSurface->normalForAngle(worldPos.x)*5 - worldSurface->dirVector(worldPos.x)*5; }
+    float3 globalPosition() { return position + worldSurface->normalForAngle(worldPos.x)*2 - worldSurface->dirVector(worldPos.x)*5; }
     float3 aheadDirection() { return worldSurface->dirVector(worldPos.x); }
     float3 upDirection() { return worldSurface->normalForAngle(worldPos.x); }
 };

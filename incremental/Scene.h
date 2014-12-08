@@ -15,7 +15,6 @@
 #include "MobiusStrip.h"
 #include "Entity.h"
 #include "MeshEntity.h"
-#include "Racer.h"
 
 #define WORLD_RADIUS 12
 #define WORLD_WIDTH 5
@@ -31,6 +30,8 @@ class Scene
     
     MobiusStrip *worldGround;
     Entity *player;
+    
+    bool globalCamera = false;
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
@@ -38,6 +39,8 @@ public:
         // BUILD YOUR SCENE HERE
         lightSources.push_back(new DirectionalLight(float3(5, 10, 5),
                                                     float3(1, 0.5, 1)));
+        lightSources.push_back(new DirectionalLight(float3(-5, -10, -5),
+                                                    float3(1, 1, 1)));
         lightSources.push_back(new PointLight(float3(0, -5, 0),
                                               float3(4, 5, 4)));
         Material* yellowDiffuseMaterial = new Material();
@@ -80,15 +83,9 @@ public:
         meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
         materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
         
-        player = new MeshEntity(materials.back(), meshVector.front(), worldGround);
-        player->scale(float3(0.3, 0.3, 0.3));
+        // creates the player tigger object
+        player = new Player(materials.back(), meshVector.back(), worldGround);
         objects.push_back(player);
-        
-        // simple Car object
-//        MeshInstance *chassis = new MeshInstance( carMatr, meshVector.back());
-//        chassis->translate(float3(-10, 10, 0));
-//        chassis->scale(float3(0.5, 0.5, 0.5));
-//        objects.push_back(chassis);
         
         // Creates the other car racers
         Material *carMatr = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chevy.png");
@@ -96,7 +93,9 @@ public:
         Mesh *chassisMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/chassis.obj");
         meshVector.push_back(chassisMesh);
         for (int i = 0; i < 5; i++) {
-            objects.push_back((new MeshEntity(carMatr, chassisMesh, worldGround))->scale(float3(0.2, 0.2, 0.2)));
+            Racer *r =new Racer(carMatr, chassisMesh, worldGround);
+            r->setStartDist(0.5*i);
+            objects.push_back(r);
         }
         
         
@@ -122,6 +121,7 @@ public:
         for (; iLightSource<GL_MAX_LIGHTS; iLightSource++)
             glDisable(GL_LIGHT0 + iLightSource);
         
+        // Shadows
 //        glDisable(GL_LIGHTING);
 //        glDisable(GL_TEXTURE_2D);
 //        glColor3d(0, 0, 0);
@@ -135,12 +135,18 @@ public:
             objects.at(iObject)->draw();
         
         // player-oriented camera transformations
-        camera.setEye(player->globalPosition());
-        camera.setAhead(player->aheadDirection());
-        camera.setUpDir(player->upDirection());
+        if (!globalCamera) {
+            camera.setEye(player->globalPosition());
+            camera.setAhead(player->aheadDirection());
+            camera.setUpDir(player->upDirection());
+        }
     }
     
     void control(std::vector<bool>& keysPressed) {
+        if (keysPressed.at('c')) {
+            globalCamera = !globalCamera;
+            camera.globalView = globalCamera;
+        }
         for (int i = 0; i < objects.size(); i++) {
             objects.at(i)->control(keysPressed, spawns, objects);
         }
