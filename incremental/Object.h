@@ -104,6 +104,34 @@ public:
     virtual void drawShadow(float3 lightDir) {}
 };
 
+class MoebiusStrip : public Object {
+    float3 origin = float3(0,0,0);
+    float width = 1.0;
+public:
+    MoebiusStrip(Material* material):Object(material){}
+    MoebiusStrip(Material* material, float3 org, float w):Object(material), origin(org), width(w) {}
+    void drawModel()
+    {
+        // bsaed on: https://www.opengl.org/discussion_boards/showthread.php/159496-Moebius-Strip
+        glBegin(GL_TRIANGLE_STRIP);
+        float3 p1 = float3();
+        for(float a = 0; a < 4*M_PI; a += 0.1)
+        {
+            for(float r = -width/2; r <= width/2; r += width-0.001)
+            {
+                
+                p1.x = cos(a)* ( 1+ (r/2 * cos(a/2)) );
+                p1.y = sin(a)* ( 1+ (r/2 * cos(a/2)) );
+                p1.z = r/2 *sin(a/2);
+                
+                glVertex3f(p1.x, p1.y, p1.z);
+            }
+        }
+        glEnd();
+    }
+    virtual void drawShadow(float3 lightDir) {}
+};
+
 class MeshInstance : public Object
 {
 protected:

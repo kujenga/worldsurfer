@@ -11,6 +11,7 @@
 
 #include "Camera.h"
 #include "LightSource.h"
+#include "Object.h"
 
 class Scene
 {
@@ -71,7 +72,7 @@ public:
         Material* groundMaterial = new Material();
         materials.push_back(groundMaterial);
         groundMaterial->kd = float3(0.4, 1, 0.4);
-        objects.push_back(new Ground(groundMaterial));
+        objects.push_back((new MoebiusStrip(groundMaterial))->scale(float3(50,50,50)));
     }
     
     void draw()
