@@ -64,7 +64,7 @@
 		86F8E34E1A35C189008958CA /* tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tree.png; sourceTree = "<group>"; };
 		86F8E3501A35E31D008958CA /* float2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = float2.h; sourceTree = "<group>"; };
 		86F8E3511A360AE0008958CA /* MobiusStrip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MobiusStrip.h; sourceTree = "<group>"; };
-		86F8E3521A360B14008958CA /* Racer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Racer.h; sourceTree = "<group>"; };
+		86F8E3521A360B14008958CA /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +191,7 @@
 			children = (
 				8606BD8B1A306D56004B6C32 /* Object.h */,
 				86F8E3511A360AE0008958CA /* MobiusStrip.h */,
-				86F8E3521A360B14008958CA /* Racer.h */,
+				86F8E3521A360B14008958CA /* Entity.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";

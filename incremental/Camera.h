@@ -30,7 +30,7 @@ public:
     }
     Camera()
     {
-        eye = float3(0, 10, 20);
+        eye = float3(0, 5, 25);
         ahead = float3(0, 0, -1);
         right = float3(1, 0, 0);
         up = float3(0, 1, 0);

@@ -19,6 +19,8 @@ public:
     MobiusStrip(Material* material):Object(material){}
     MobiusStrip(Material* material, float r, float w):Object(material), radius(r), width(w) {}
     
+    const float getRadius() { return radius; }
+    
     void fillPointForAngleOffset(float a, float r, float3 &pt)
     {
         pt.x = cos(a)* ( radius+ (r/2 * cos(a/2)) );

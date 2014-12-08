@@ -13,7 +13,7 @@
 #include "LightSource.h"
 #include "Object.h"
 #include "MobiusStrip.h"
-#include "Racer.h"
+#include "Entity.h"
 
 class Scene
 {
@@ -51,7 +51,7 @@ public:
         worldGround = new MobiusStrip(materials.at(4), 12, 6);
         objects.push_back(worldGround->scale(float3(1,1,1)));
         
-        objects.push_back((new Racer(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
+        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
     }
     ~Scene()
     {

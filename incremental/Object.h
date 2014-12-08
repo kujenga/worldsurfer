@@ -75,45 +75,6 @@ public:
     }
 };
 
-class Teapot : public Object
-{
-public:
-    Teapot(Material* material):Object(material){}
-    void drawModel()
-    {
-        glutSolidTeapot(1.0f);
-    }
-};
-
-// simple flat ground
-class Ground : public Object
-{
-protected:
-    float4 origin = float4(0,0,0,0);
-public:
-    Ground(Material* material):Object(material) {}
-    
-    void drawModel()
-    {
-//        glBegin(GL_TRIANGLE_FAN);
-//        glVertex4d(0, 0, 0, 1);
-//        glVertex4d(1, 0, 0, 0.01);
-//        glVertex4d(0, 0, 1, 0.01);
-//        glVertex4d(-1, 0, -1, 0.01);
-//        glVertex4d(1, 0, 0, 0.01);
-//        glEnd();
-        
-        glBegin(GL_QUADS);
-        glNormal3d(0, 1, 0);
-        glVertex3f(20, 0, 10);
-        glVertex3f(20, 0, -10);
-        glVertex3f(-20, 0, -10);
-        glVertex3f(-20, 0, 10);
-        glEnd();
-    }
-    virtual void drawShadow(float3 lightDir) {}
-};
-
 //////////////////////////////////////////////////////////
 // Mesh-based objects
 //////////////////////////////////////////////////////////
