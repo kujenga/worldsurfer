@@ -53,15 +53,15 @@ public:
         
         if(data == NULL) return;
         
+        glGenTextures(1, &textureName);  // id generation
+        glBindTexture(GL_TEXTURE_2D, textureName);      // binding
+        
         if (filtering == GL_LINEAR_MIPMAP_LINEAR) {
             if(nComponents == 4)
                 gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, width, height, GL_RGBA, GL_UNSIGNED_BYTE, data);
             else if(nComponents == 3)
                 gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
         } else {
-            glGenTextures(1, &textureName);  // id generation
-            glBindTexture(GL_TEXTURE_2D, textureName);      // binding
-            
             if(nComponents == 4) {
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data); //uploading
             } else if(nComponents == 3) {
@@ -77,10 +77,10 @@ public:
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, textureName);
         // when texture area is small, bilinear filter the closest mipmap
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
                         GL_LINEAR_MIPMAP_NEAREST );
         // when texture area is large, bilinear filter the original
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+        glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
         glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     }
     

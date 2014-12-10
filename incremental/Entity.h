@@ -21,6 +21,8 @@ protected:
     float baseRotation = 0.0;
     float3 baseOffset = float3(0,0,0);
     
+    std::vector<Entity*> subEntities;
+    
     // dimensions are x forward, y left and right, z up
     float3 worldPos = float3(0,0,1);
     MobiusStrip *worldSurface;
@@ -48,6 +50,9 @@ public:
     virtual void drawModel()
     {
         worldSurface->glRotateForObjAtAngle(worldPos.x);
+        for (int i = 0; i < subEntities.size(); i++) {
+            subEntities.at(i)->drawModel();
+        }
     }
     
     virtual void move(double t, double dt)
@@ -57,10 +62,14 @@ public:
         velocity *= pow(drag, dt); // drag
         
         worldPos += velocity*dt; // movement
-        if (abs(worldPos.y) > worldSurface->getRadius()/4) {
-            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? 0.25 : -0.25);
-            velocity.y *= -restitution;
+        
+        // bouncing off the side
+        if (abs(worldPos.y) > worldSurface->getRadius()*M_PI*0.24) {
+            worldPos.y = worldSurface->getRadius() * (worldPos.y > 0 ? M_PI*0.24 : -M_PI*0.24);
+            velocity.y *= -0.5;
+            velocity *= restitution;
         }
+        // bouncing off the ground
         if (worldPos.z < 0) {
             worldPos.z = 0;
             velocity.z *= -restitution;
@@ -74,7 +83,7 @@ public:
     ////////////////////////////////////////////////////
     // Accsessor Methods (for camera placement)
     ////////////////////////////////////////////////////
-    float3 globalPosition() { return position + worldSurface->normalForAngle(worldPos.x)*2 - worldSurface->dirVector(worldPos.x)*5; }
+    float3 globalPosition() { return position + worldSurface->normalForAngle(worldPos.x).normalize()*2 - worldSurface->dirVector(worldPos.x).normalize()*5; }
     float3 aheadDirection() { return worldSurface->dirVector(worldPos.x); }
     float3 upDirection() { return worldSurface->normalForAngle(worldPos.x); }
 };

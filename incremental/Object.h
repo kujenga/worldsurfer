@@ -13,6 +13,9 @@
 #include "Mesh.h"
 #include "Material.h"
 
+#define DRAG_COEFF 0.6
+#define RESTITUTION 0.9
+
 const float3 VERT_GRAVITY = float3(0,-10, 0);
 
 // Object abstract base class.
@@ -35,6 +38,11 @@ public:
     }
     Object* rotate(float angle){
         orientationAngle += angle; return this;
+    }
+    Object*rotate(float3 axis, float angle) {
+        orientationAxis = axis;
+        orientationAngle = angle;
+        return this;
     }
     const float3 getPosition() { return position; }
     virtual void draw()
@@ -100,7 +108,6 @@ protected:
     float3 velocity = float3(0,0,0);
     float3 acceleration = float3(0,0,0);
     float angularVelocity = 0;
-    float restitution = 0.9;
 public:
     Bouncer(Material* material, Mesh* mesh) : MeshInstance(material, mesh) {}
     
@@ -128,16 +135,16 @@ public:
     virtual void move(double t, double dt)
     {
         rotate(angularVelocity*dt);
-        angularVelocity *= pow(0.8, dt);
+        angularVelocity *= pow(DRAG_COEFF, dt);
         
         velocity += VERT_GRAVITY*dt; // gravitational acceleration
         velocity += acceleration*dt;
-        velocity *= pow(0.8, dt); // drag
+        velocity *= pow(DRAG_COEFF, dt); // drag
         
         position += velocity*dt; // movement
         if (position.y < 0) {
             position.y = 0;
-            velocity.y *= -restitution;
+            velocity.y *= -RESTITUTION;
         }
     }
     

@@ -16,8 +16,12 @@
 #include "Entity.h"
 #include "MeshEntity.h"
 
-#define WORLD_RADIUS 12
-#define WORLD_WIDTH 5
+// used to generate random points
+#define ARC4RANDOM_MAX 0x100000000
+#define LITTLE_RAND ((double)arc4random() / ARC4RANDOM_MAX)
+
+#define WORLD_RADIUS 50
+#define WORLD_WIDTH 40
 
 class Scene
 {
@@ -31,18 +35,18 @@ class Scene
     MobiusStrip *worldGround;
     Entity *player;
     
-    bool globalCamera = true;
+    bool globalCamera = false;
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
     {
         // BUILD YOUR SCENE HERE
         lightSources.push_back(new DirectionalLight(float3(5, 10, 5),
-                                                    float3(1, 0.5, 1)));
+                                                    float3(3, 3, 3)));
         lightSources.push_back(new DirectionalLight(float3(-5, -10, -5),
-                                                    float3(1, 1, 1)));
+                                                    float3(3, 3, 3)));
         lightSources.push_back(new PointLight(float3(0, -5, 0),
-                                              float3(4, 5, 4)));
+                                              float3(40, 50, 40)));
         Material* yellowDiffuseMaterial = new Material();
         materials.push_back(yellowDiffuseMaterial);
         yellowDiffuseMaterial->kd = float3(1, 1, 0);
@@ -52,14 +56,6 @@ public:
         materials.push_back(new Material());
         materials.push_back(new Material());
         materials.push_back(new Material());
-        
-//        objects.push_back( (new Teapot( yellowDiffuseMaterial))->translate(float3(2, 2, 0)) );
-//        objects.push_back( (new Teapot( materials.at(1) )     )->translate(float3(0, 3, 2))->scale(float3(0.6, 0.6, 0.6)) );
-        
-        // Mobius Strip ground
-        worldGround = new MobiusStrip(materials.at(4), WORLD_RADIUS, WORLD_WIDTH);
-        objects.push_back(worldGround->scale(float3(1,1,1)));
-        
     }
     ~Scene()
     {
@@ -78,8 +74,13 @@ public:
     }
     
     void initialize() {
-//        objects.push_back((new Entity(materials.at(2), worldGround))->translate(float3(0,4, 0.5))->scale(float3(1.3, 1.3, 1.3)) );
+        // Mobius Strip ground
+        Material *groundMat = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/models/rainbow.png");
+        materials.push_back(groundMat);
+        worldGround = new MobiusStrip(groundMat, WORLD_RADIUS, WORLD_WIDTH);
+        objects.push_back(worldGround->scale(float3(1,1,1)));
         
+        // tigger textures and mesh
         meshVector.push_back(new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.obj"));
         materials.push_back(new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tigger.png"));
         
@@ -104,8 +105,9 @@ public:
         materials.push_back(treeMatr);
         Mesh *treeMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/HundredAcreWood/tree.obj");
         meshVector.push_back(treeMesh);
-        for (float a = 0; a < 2*M_PI; a += M_PI_2) {
-            objects.push_back((new MeshInstance(treeMatr, treeMesh))->translate(worldGround->pointForAngleOffset(a, 0)*3));
+        for (float a = 0; a < 2*M_PI; a += (LITTLE_RAND*0.3+0.3)) {
+            objects.push_back((new MeshInstance(treeMatr, treeMesh))->translate(worldGround->pointForAngleOffset(a, 0)*3)->scale(float3(2,2,2)));
+            objects.push_back((new MeshInstance(treeMatr, treeMesh))->translate(worldGround->pointForAngleOffset(a, 0)*3+float3(0,-10,3))->scale(float3(2,2,2))->rotate(float3(1,0,0),180));
         }
     }
     

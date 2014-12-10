@@ -24,7 +24,7 @@ class Camera
     float2 lastMousePos;
     float2 mouseDelta;
 public:
-    bool globalView = true;
+    bool globalView = false;
     
     void setAhead(float3 dir) { ahead = dir; }
     void setEye(float3 pos) { eye = pos; }
@@ -48,7 +48,7 @@ public:
     {
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(fov / 3.14 * 180, aspect, 0.1, 200);
+        gluPerspective(fov / 3.14 * 180, aspect, 0.1, 500);
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(eye.x, eye.y, eye.z, eye.x+ahead.x, eye.y+ahead.y, eye.z+ahead.z, up.x, up.y, up.z);
@@ -100,7 +100,6 @@ public:
     void setAspectRatio(float ar)  {
         aspect = ar;
     }
-    
 };
 
 #endif

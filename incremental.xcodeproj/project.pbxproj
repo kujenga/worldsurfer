@@ -68,6 +68,7 @@
 		86F8E3521A360B14008958CA /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		86F8E3531A363FCE008958CA /* MeshEntity.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = MeshEntity.h; sourceTree = "<group>"; };
 		86F8E3551A3661E0008958CA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		86F981E31A38E51300F5D739 /* rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbow.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +126,7 @@
 				8606BD921A30825A004B6C32 /* coordinates */,
 				863500571A273030008C5E66 /* HundredAcreWood */,
 				8635005C1A273030008C5E66 /* MeshTextureTools */,
+				86F981E21A38E4FF00F5D739 /* ground */,
 				86F8E33C1A35C189008958CA /* chevy */,
 				86F8E3411A35C189008958CA /* heli */,
 				86F8E3471A35C189008958CA /* models */,
@@ -199,6 +201,15 @@
 				86F8E3531A363FCE008958CA /* MeshEntity.h */,
 			);
 			name = objects;
+			sourceTree = "<group>";
+		};
+		86F981E21A38E4FF00F5D739 /* ground */ = {
+			isa = PBXGroup;
+			children = (
+				86F981E31A38E51300F5D739 /* rainbow.png */,
+			);
+			name = ground;
+			path = models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
