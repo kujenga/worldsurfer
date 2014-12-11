@@ -13,6 +13,10 @@
 #include "Mesh.h"
 #include "Material.h"
 
+// used to generate random points
+#define ARC4RANDOM_MAX 0x100000000
+#define LITTLE_RAND ((double)arc4random() / ARC4RANDOM_MAX)
+
 #define DRAG_COEFF 0.6
 #define RESTITUTION 0.9
 

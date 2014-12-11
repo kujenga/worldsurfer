@@ -44,6 +44,7 @@ protected:
         // add in base position and height
         position += baseOffset + orientationAxis.normalize() * worldPos.z;
     }
+    
 public:
     
     Entity(Material* material, MobiusStrip *surface):Object(material), worldSurface(surface) {
@@ -88,8 +89,12 @@ public:
     
     virtual void collide(bool myFault)
     {
-        alive = false;
+        if (!myFault) {
+            alive = false;
+        }
     }
+    
+    void setWorldPos(float3 f) {worldPos = f;}
     
     ////////////////////////////////////////////////////
     // Accsessor Methods (for camera placement)

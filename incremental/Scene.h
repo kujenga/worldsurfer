@@ -36,6 +36,9 @@ class Scene
     Entity *player;
     
     bool globalCamera = false;
+    
+    bool isShooting = false;
+    
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
@@ -152,6 +155,15 @@ public:
         if (keysPressed.at('c')) {
             globalCamera = !globalCamera;
             camera.globalView = globalCamera;
+        }
+        // shoot action
+        if (keysPressed.at(' ')) {
+            if (!isShooting) {
+                isShooting = true;
+                objects.push_back(((Player*)player)->newBullet());
+            }
+        } else {
+            isShooting = false;
         }
         for (int i = 0; i < objects.size(); i++) {
             objects.at(i)->control(keysPressed, spawns, objects);

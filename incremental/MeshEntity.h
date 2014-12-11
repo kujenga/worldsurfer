@@ -27,11 +27,32 @@ public:
     }
 };
 
+class Bullet : public MeshEntity {
+    
+public:
+    Bullet(Material* material, Mesh *mesh, MobiusStrip *surface) : MeshEntity(material, mesh, surface) {
+        acceleration.x = 3*NPC_ACCELERATION;
+    }
+    
+    void setVelocity(float v) { velocity.x = v; }
+    
+    // bullet is invincible
+    virtual void collide(bool myFault) {}
+};
+
 class Player : public MeshEntity {
+    
+protected:
+    
+    Material *bulletMat;
+    Mesh *bulletMesh;
     
 public:
     Player(Material* material, Mesh *mesh, MobiusStrip *surface) : MeshEntity(material, mesh, surface) {
         baseRotation = 90.0;
+        
+        bulletMat = new TexturedMaterial("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/models/balloon.png");
+        bulletMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/models/balloon.obj");
     }
     
     virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects) {
@@ -56,15 +77,20 @@ public:
         } else {
             acceleration.y = 0;
         }
-        // hop movement
-        if (keysPressed.at(' ')) {
-            acceleration.z = 1;
-            keysUsed = true;
-        } else {
-            acceleration.z = 0;
-        }
+
         return keysUsed;
     }
+    
+    Bullet* newBullet()
+    {
+        Bullet *b = new Bullet(bulletMat, bulletMesh, worldSurface);
+        b->setWorldPos(worldPos + float3(0.1i,0,0));
+        b->setVelocity(velocity.x*1.1);
+        return b;
+    }
+    
+    // player is invincible
+    virtual void collide(bool myFault) {}
 };
 
 class Wheel : public MeshEntity {
@@ -94,6 +120,8 @@ class Racer : public MeshEntity {
 public:
     Racer(Material* material, Mesh *mesh, MobiusStrip *surface) : MeshEntity(material, mesh, surface) {
         acceleration.x = NPC_ACCELERATION;
+        
+        worldPos.y = LITTLE_RAND*40 - 20;
         
         wheelMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/wheel.obj");
 //        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(2,4,0)));
