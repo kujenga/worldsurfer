@@ -96,20 +96,19 @@ public:
         acceleration.x = NPC_ACCELERATION;
         
         wheelMesh = new Mesh("/Users/ataylor/Documents/Williams/Graphics/incremental/incremental/chevy/wheel.obj");
-        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(2,4,0)));
-        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(2,-4,0)));
-        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(-2,4,0)));
-        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(-2,-4,0)));
+//        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(2,4,0)));
+//        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(2,-4,0)));
+//        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(-2,4,0)));
+//        subEntities.push_back((Entity*)(new Wheel(material, wheelMesh, surface))->translate(float3(-2,-4,0)));
     }
     ~Racer()
     {
-        
         delete wheelMesh;
     }
     void setStartDist(float dist) { worldPos.x = dist; }
     
     virtual void drawModel() {
-//        MeshEntity::drawModel();
+        MeshEntity::drawModel();
         for (int i = 0; i < subEntities.size(); i++) {
             subEntities.at(i)->drawModel();
         }

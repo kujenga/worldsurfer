@@ -59,6 +59,7 @@ public:
     }
     virtual void drawModel()=0;
     virtual void move(double t, double dt) {}
+    virtual void collide(bool myFault) {}
     virtual bool control(std::vector<bool>& keysPressed, std::vector<Object*>& spawn, std::vector<Object*>& objects)
     {
         return false;
