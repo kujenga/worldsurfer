@@ -70,7 +70,6 @@ public:
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data); //uploading
             }
         }
-        
         delete data;
     }
     virtual void apply()

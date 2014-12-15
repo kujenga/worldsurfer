@@ -35,10 +35,7 @@ public:
     // the rotation amount on the specified strip location
     float worldRotation(float a) { return 90*a/M_PI; }
     // performs an openGL rotation on the current matrix, used by entities to adjust their position to the world surface
-    void glRotateForObjAtAngle(float a)
-    {
-        glRotatef(worldRotation(a), -sinf(a), 0, cosf(a));
-    }
+    void glRotateForObjAtAngle(float a) { glRotatef(worldRotation(a), -sinf(a), 0, cosf(a)); }
     
     //////////////////////////////
     // Drawing functions

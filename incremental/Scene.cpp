@@ -7,6 +7,7 @@
 //
 
 #include "Object.h"
+#include "MeshInstance.h"
 #include "Scene.h"
 #include "Player.h"
 #include "Racer.h"

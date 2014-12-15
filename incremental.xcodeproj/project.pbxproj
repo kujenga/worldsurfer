@@ -23,6 +23,7 @@
 		86FB6DF81A3F478C006592F6 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF71A3F478C006592F6 /* Object.cpp */; };
 		86FB6DFA1A3F4828006592F6 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF91A3F4828006592F6 /* Scene.cpp */; };
 		86FB6DFF1A3F4BC9006592F6 /* WorldSurface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DFD1A3F4BC9006592F6 /* WorldSurface.cpp */; };
+		86FB6E021A3F6032006592F6 /* MeshInstance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6E001A3F6032006592F6 /* MeshInstance.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -95,6 +96,8 @@
 		86FB6DF91A3F4828006592F6 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		86FB6DFD1A3F4BC9006592F6 /* WorldSurface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldSurface.cpp; sourceTree = "<group>"; };
 		86FB6DFE1A3F4BC9006592F6 /* WorldSurface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WorldSurface.h; sourceTree = "<group>"; };
+		86FB6E001A3F6032006592F6 /* MeshInstance.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshInstance.cpp; sourceTree = "<group>"; };
+		86FB6E011A3F6032006592F6 /* MeshInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeshInstance.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,6 +228,8 @@
 			children = (
 				86FB6DF71A3F478C006592F6 /* Object.cpp */,
 				8606BD8B1A306D56004B6C32 /* Object.h */,
+				86FB6E001A3F6032006592F6 /* MeshInstance.cpp */,
+				86FB6E011A3F6032006592F6 /* MeshInstance.h */,
 				86FB6DFD1A3F4BC9006592F6 /* WorldSurface.cpp */,
 				86FB6DFE1A3F4BC9006592F6 /* WorldSurface.h */,
 				86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */,
@@ -331,6 +336,7 @@
 				863500611A273030008C5E66 /* stb_image.c in Sources */,
 				86FB6DF61A3F45FF006592F6 /* MobiusStrip.cpp in Sources */,
 				86FB6DF11A3F423E006592F6 /* Entity.cpp in Sources */,
+				86FB6E021A3F6032006592F6 /* MeshInstance.cpp in Sources */,
 				86FB6DEF1A3F4203006592F6 /* Wheel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
