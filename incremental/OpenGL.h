@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Aaron Taylor. All rights reserved.
 //
 
-#ifndef incremental_OpenGL_h
-#define incremental_OpenGL_h
+#pragma once
 
 
 #define _USE_MATH_DEFINES
@@ -24,5 +23,3 @@
 // Download glut from: http://www.opengl.org/resources/libraries/glut/
 #include <GLUT/glut.h>
 
-
-#endif

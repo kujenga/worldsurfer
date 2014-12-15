@@ -21,6 +21,7 @@
 		86FB6DF41A3F43E8006592F6 /* MeshEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */; };
 		86FB6DF61A3F45FF006592F6 /* MobiusStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */; };
 		86FB6DF81A3F478C006592F6 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF71A3F478C006592F6 /* Object.cpp */; };
+		86FB6DFA1A3F4828006592F6 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF91A3F4828006592F6 /* Scene.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -90,6 +91,7 @@
 		86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshEntity.cpp; sourceTree = "<group>"; };
 		86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobiusStrip.cpp; sourceTree = "<group>"; };
 		86FB6DF71A3F478C006592F6 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
+		86FB6DF91A3F4828006592F6 /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				863500441A272F7A008C5E66 /* main.cpp */,
+				86FB6DF91A3F4828006592F6 /* Scene.cpp */,
 				8606BD8F1A3081A2004B6C32 /* Scene.h */,
 				86F8E34F1A35DBE6008958CA /* objects */,
 				8606BD8E1A306DF2004B6C32 /* Material.h */,
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86FB6DE61A3F4116006592F6 /* Bullet.cpp in Sources */,
+				86FB6DFA1A3F4828006592F6 /* Scene.cpp in Sources */,
 				86FB6DEC1A3F41A4006592F6 /* Racer.cpp in Sources */,
 				86FB6DF81A3F478C006592F6 /* Object.cpp in Sources */,
 				863500601A273030008C5E66 /* Mesh.cpp in Sources */,
