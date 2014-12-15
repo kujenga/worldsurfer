@@ -49,18 +49,8 @@ public:
         return this;
     }
     const float3 getPosition() { return position; }
-    virtual void draw()
-    {
-        material->apply();
-        // apply scaling, translation and orientation
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glTranslatef(position.x, position.y, position.z);
-        glRotatef(orientationAngle, orientationAxis.x, orientationAxis.y, orientationAxis.z);
-        glScalef(scaleFactor.x, scaleFactor.y, scaleFactor.z);
-        drawModel();
-        glPopMatrix();
-    }
+    virtual void draw();
+    
     virtual void drawModel()=0;
     virtual void move(double t, double dt) {}
     virtual void collide(bool myFault) {}
@@ -68,23 +58,7 @@ public:
     {
         return false;
     }
-    virtual void drawShadow(float3 lightDir)
-    {
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        // scale down to shadow shape
-        
-        lightDir.x = lightDir.x * position.y/lightDir.y;
-        lightDir.z = lightDir.z * position.y/lightDir.y;
-        glTranslatef(lightDir.x, 0.2, lightDir.z);
-        glScalef(1, 0, 1);
-        
-        glTranslatef(position.x, position.y, position.z);
-        glRotatef(orientationAngle, orientationAxis.x, orientationAxis.y, orientationAxis.z);
-        glScalef(scaleFactor.x, scaleFactor.y, scaleFactor.z);
-        drawModel();
-        glPopMatrix();
-    }
+    virtual void drawShadow(float3 lightDir);
 };
 
 //////////////////////////////////////////////////////////

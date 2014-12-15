@@ -13,6 +13,14 @@
 		863500601A273030008C5E66 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8635005D1A273030008C5E66 /* Mesh.cpp */; };
 		863500611A273030008C5E66 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8635005F1A273030008C5E66 /* stb_image.c */; };
 		86F8E3561A3661E0008958CA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 86F8E3551A3661E0008958CA /* README.md */; };
+		86FB6DE61A3F4116006592F6 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE41A3F4116006592F6 /* Bullet.cpp */; };
+		86FB6DE91A3F4145006592F6 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE71A3F4145006592F6 /* Player.cpp */; };
+		86FB6DEC1A3F41A4006592F6 /* Racer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DEA1A3F41A4006592F6 /* Racer.cpp */; };
+		86FB6DEF1A3F4203006592F6 /* Wheel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DED1A3F4203006592F6 /* Wheel.cpp */; };
+		86FB6DF11A3F423E006592F6 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF01A3F423E006592F6 /* Entity.cpp */; };
+		86FB6DF41A3F43E8006592F6 /* MeshEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */; };
+		86FB6DF61A3F45FF006592F6 /* MobiusStrip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */; };
+		86FB6DF81A3F478C006592F6 /* Object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DF71A3F478C006592F6 /* Object.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -69,6 +77,19 @@
 		86F8E3531A363FCE008958CA /* MeshEntity.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = MeshEntity.h; sourceTree = "<group>"; };
 		86F8E3551A3661E0008958CA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		86F981E31A38E51300F5D739 /* rainbow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rainbow.png; sourceTree = "<group>"; };
+		86FB6DE41A3F4116006592F6 /* Bullet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		86FB6DE51A3F4116006592F6 /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		86FB6DE71A3F4145006592F6 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
+		86FB6DE81A3F4145006592F6 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		86FB6DEA1A3F41A4006592F6 /* Racer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Racer.cpp; sourceTree = "<group>"; };
+		86FB6DEB1A3F41A4006592F6 /* Racer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Racer.h; sourceTree = "<group>"; };
+		86FB6DED1A3F4203006592F6 /* Wheel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wheel.cpp; sourceTree = "<group>"; };
+		86FB6DEE1A3F4203006592F6 /* Wheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wheel.h; sourceTree = "<group>"; };
+		86FB6DF01A3F423E006592F6 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		86FB6DF21A3F42EC006592F6 /* OpenGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGL.h; sourceTree = "<group>"; };
+		86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshEntity.cpp; sourceTree = "<group>"; };
+		86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobiusStrip.cpp; sourceTree = "<group>"; };
+		86FB6DF71A3F478C006592F6 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +144,7 @@
 				8606BD8E1A306DF2004B6C32 /* Material.h */,
 				8606BD911A30820C004B6C32 /* LightSource.h */,
 				8606BD901A3081EE004B6C32 /* Camera.h */,
+				86FB6DF21A3F42EC006592F6 /* OpenGL.h */,
 				8606BD921A30825A004B6C32 /* coordinates */,
 				863500571A273030008C5E66 /* HundredAcreWood */,
 				8635005C1A273030008C5E66 /* MeshTextureTools */,
@@ -195,10 +217,22 @@
 		86F8E34F1A35DBE6008958CA /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				86FB6DF71A3F478C006592F6 /* Object.cpp */,
 				8606BD8B1A306D56004B6C32 /* Object.h */,
+				86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */,
 				86F8E3511A360AE0008958CA /* MobiusStrip.h */,
+				86FB6DF01A3F423E006592F6 /* Entity.cpp */,
 				86F8E3521A360B14008958CA /* Entity.h */,
+				86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */,
 				86F8E3531A363FCE008958CA /* MeshEntity.h */,
+				86FB6DE41A3F4116006592F6 /* Bullet.cpp */,
+				86FB6DE51A3F4116006592F6 /* Bullet.h */,
+				86FB6DE71A3F4145006592F6 /* Player.cpp */,
+				86FB6DE81A3F4145006592F6 /* Player.h */,
+				86FB6DEA1A3F41A4006592F6 /* Racer.cpp */,
+				86FB6DEB1A3F41A4006592F6 /* Racer.h */,
+				86FB6DED1A3F4203006592F6 /* Wheel.cpp */,
+				86FB6DEE1A3F4203006592F6 /* Wheel.h */,
 			);
 			name = objects;
 			sourceTree = "<group>";
@@ -268,10 +302,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FB6DE61A3F4116006592F6 /* Bullet.cpp in Sources */,
+				86FB6DEC1A3F41A4006592F6 /* Racer.cpp in Sources */,
+				86FB6DF81A3F478C006592F6 /* Object.cpp in Sources */,
 				863500601A273030008C5E66 /* Mesh.cpp in Sources */,
+				86FB6DF41A3F43E8006592F6 /* MeshEntity.cpp in Sources */,
+				86FB6DE91A3F4145006592F6 /* Player.cpp in Sources */,
 				863500451A272F7A008C5E66 /* main.cpp in Sources */,
 				86F8E3561A3661E0008958CA /* README.md in Sources */,
 				863500611A273030008C5E66 /* stb_image.c in Sources */,
+				86FB6DF61A3F45FF006592F6 /* MobiusStrip.cpp in Sources */,
+				86FB6DF11A3F423E006592F6 /* Entity.cpp in Sources */,
+				86FB6DEF1A3F4203006592F6 /* Wheel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

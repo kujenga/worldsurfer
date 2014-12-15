@@ -9,6 +9,8 @@
 #ifndef incremental_Material_h
 #define incremental_Material_h
 
+#include "OpenGL.h"
+
 extern "C" unsigned char* stbi_load(char const *filename, int *x, int *y, int *comp, int req_comp);
 
 class Material

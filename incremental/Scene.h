@@ -14,7 +14,8 @@
 #include "Object.h"
 #include "MobiusStrip.h"
 #include "Entity.h"
-#include "MeshEntity.h"
+#include "Player.h"
+#include "Racer.h"
 
 // used to generate random points
 #define ARC4RANDOM_MAX 0x100000000
