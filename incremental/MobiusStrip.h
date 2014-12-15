@@ -9,15 +9,15 @@
 #ifndef incremental_MobiusStrip_h
 #define incremental_MobiusStrip_h
 
-#include "Object.h"
+#include "WorldSurface.h"
 
-class MobiusStrip : public Object {
+class MobiusStrip : public WorldSurface {
     float3 origin = float3(0,0,0);
     float radius = 1.0;
     float width = 1.0;
 public:
-    MobiusStrip(Material* material):Object(material){}
-    MobiusStrip(Material* material, float r, float w):Object(material), radius(r), width(2*w) {}
+    MobiusStrip(Material* material) : WorldSurface(material){}
+    MobiusStrip(Material* material, float r, float w) : WorldSurface(material), radius(r), width(2*w) {}
     
     const float getRadius() { return radius; }
     
@@ -26,8 +26,6 @@ public:
     ///////////////////////////////
     
     void fillPointForAngleOffset(float a, float r, float3 &pt);
-    // wrapper for fill function that returns a new point
-    float3 pointForAngleOffset(float a, float r) { float3 pt; fillPointForAngleOffset(a, r, pt); return pt; }
     
     float3 normalForAngle(float a);
     

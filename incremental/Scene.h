@@ -11,7 +11,6 @@
 
 #include "OpenGL.h"
 
-#include "Object.h"
 #include "MobiusStrip.h"
 #include "Entity.h"
 #include "Camera.h"

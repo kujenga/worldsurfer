@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Aaron Taylor. All rights reserved.
 //
 
+#include "Object.h"
 #include "Scene.h"
 #include "Player.h"
 #include "Racer.h"
