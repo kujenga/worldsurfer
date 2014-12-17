@@ -38,6 +38,7 @@ class Scene
     bool globalCamera = false;
     
     bool isShooting = false;
+    bool changingCamera = false;
     
     int killCount = 0;
     

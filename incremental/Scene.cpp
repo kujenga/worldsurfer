@@ -117,8 +117,13 @@ void Scene::draw()
 void Scene::control(std::vector<bool>& keysPressed)
 {
     if (keysPressed.at('c')) {
-        globalCamera = !globalCamera;
-        camera.globalView = globalCamera;
+        if (!changingCamera) {
+            changingCamera = true;
+            globalCamera = !globalCamera;
+            camera.globalView = globalCamera;
+        }
+    } else {
+        changingCamera = false;
     }
     // shoot action
     if (keysPressed.at(' ')) {
