@@ -132,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				86F8E3551A3661E0008958CA /* README.md */,
-				863500431A272F7A008C5E66 /* incremental */,
+				863500431A272F7A008C5E66 /* worldsurfer */,
 				863500421A272F7A008C5E66 /* Products */,
 				86700D651A41BC4B006DF920 /* frameworks */,
 			);
@@ -146,7 +146,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		863500431A272F7A008C5E66 /* incremental */ = {
+		863500431A272F7A008C5E66 /* worldsurfer */ = {
 			isa = PBXGroup;
 			children = (
 				86FB6DF21A3F42EC006592F6 /* libs.h */,
@@ -166,6 +166,7 @@
 				86F8E3411A35C189008958CA /* heli */,
 				86F8E3471A35C189008958CA /* models */,
 			);
+			name = worldsurfer;
 			path = incremental;
 			sourceTree = "<group>";
 		};

@@ -7,6 +7,7 @@
 //
 
 #include "libs.h"
+#include <thread>
 
 #include "float3.h"
 #include <vector>
@@ -28,6 +29,24 @@ Scene scene = Scene(std::vector<Mesh*>());
 
 // vector of the keys that kaye been pressed
 std::vector<bool> keysPressed;
+
+//////////////////////////////////////////////////////
+// Audio playback methods, just using bash commands
+//////////////////////////////////////////////////////
+
+void playAudio()
+{
+    system("afplay /Users/ataylor/Documents/Williams/Graphics/worldsurfer/incremental/mario_rr.mp3");
+}
+
+void killAudio()
+{
+    system("kill `ps aux | grep afplay | awk '{print $2}'`");
+}
+
+//////////////////////////////////////////////////////
+// GLUT callback methods
+//////////////////////////////////////////////////////
 
 // Displays the image.
 void onDisplay( ) {
@@ -53,6 +72,13 @@ void onIdle()
 }
 
 void onKeyboard(unsigned char key, int x, int y) {
+//    if (key == ']') {
+//        playAudio();
+//    }
+    if (key == '[') {
+        std::thread audio (killAudio);
+    }
+    
     keysPressed.at(key) = true;
 }
 
@@ -80,6 +106,10 @@ void onReshape(int winWidth, int winHeight) {
                                      (float)winWidth/winHeight);
 }
 
+//////////////////////////////////////////////////////
+// main method
+//////////////////////////////////////////////////////
+
 int main(int argc, char **argv) {
     glutInit(&argc, argv);						// initialize GLUT
     glutInitWindowSize(screenWidth, screenHeight);				// startup window size 
@@ -104,9 +134,13 @@ int main(int argc, char **argv) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_NORMALIZE);
     
+    std::thread audio (playAudio);
+    
     scene.initialize();
     
     glutMainLoop();								// launch event handling loop
+    
+    killAudio();
     
     return 0;
 }
