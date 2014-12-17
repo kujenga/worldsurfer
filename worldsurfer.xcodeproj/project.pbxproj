@@ -12,7 +12,6 @@
 		8635004E1A272F9C008C5E66 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8635004D1A272F9C008C5E66 /* OpenGL.framework */; };
 		863500601A273030008C5E66 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8635005D1A273030008C5E66 /* Mesh.cpp */; };
 		863500611A273030008C5E66 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8635005F1A273030008C5E66 /* stb_image.c */; };
-		86700D641A41BC3D006DF920 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86700D631A41BC3D006DF920 /* OpenAL.framework */; };
 		86F8E3561A3661E0008958CA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 86F8E3551A3661E0008958CA /* README.md */; };
 		86FB6DE61A3F4116006592F6 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE41A3F4116006592F6 /* Bullet.cpp */; };
 		86FB6DE91A3F4145006592F6 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE71A3F4145006592F6 /* Player.cpp */; };
@@ -108,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86700D641A41BC3D006DF920 /* OpenAL.framework in Frameworks */,
 				8635004E1A272F9C008C5E66 /* OpenGL.framework in Frameworks */,
 				8635004C1A272F97008C5E66 /* GLUT.framework in Frameworks */,
 			);

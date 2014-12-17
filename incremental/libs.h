@@ -22,5 +22,3 @@
 #include <OpenGL/glu.h>
 // Download glut from: http://www.opengl.org/resources/libraries/glut/
 #include <GLUT/glut.h>
-
-#include <OpenAL/alc.h>

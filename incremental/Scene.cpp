@@ -84,6 +84,34 @@ void Scene::draw()
         camera.setAhead(player->aheadDirection());
         camera.setUpDir(player->upDirection());
     }
+    
+    char buf[BUFSIZ];
+    char name[] = "Collisions";
+    
+    snprintf(buf, sizeof(buf), "%s: %04d", name, killCount);
+    
+    //Assume we are in MODEL_VIEW already
+    
+    glPushMatrix ();
+    glLoadIdentity ();
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix ();
+    glLoadIdentity();
+    
+    GLint viewport [4];
+    glGetIntegerv (GL_VIEWPORT, viewport);
+    gluOrtho2D (0,viewport[2], viewport[3], 0);
+    
+    glDepthFunc (GL_ALWAYS);
+    glColor3f (1,1,1);
+    glRasterPos2f(0,0);
+    for (char *p = buf; *p; p++)
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *p);
+    
+    glDepthFunc (GL_LESS);
+    glPopMatrix ();
+    glMatrixMode(GL_MODELVIEW);
+    glPopMatrix ();
 }
 
 void Scene::control(std::vector<bool>& keysPressed)
@@ -97,6 +125,7 @@ void Scene::control(std::vector<bool>& keysPressed)
         if (!isShooting) {
             isShooting = true;
             objects.push_back(((Player*)player)->newBullet());
+            killCount++;
         }
     } else {
         isShooting = false;

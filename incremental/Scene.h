@@ -39,6 +39,8 @@ class Scene
     
     bool isShooting = false;
     
+    int killCount = 0;
+    
 public:
     Scene() {}
     Scene(std::vector<Mesh*> meshes) : meshVector(meshes)
