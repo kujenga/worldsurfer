@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Aaron Taylor. All rights reserved.
 //
 
-
-#include "OpenGL.h"
+#include "libs.h"
 
 #include "float3.h"
 #include <vector>

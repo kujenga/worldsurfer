@@ -9,7 +9,7 @@
 #ifndef incremental_Scene_h
 #define incremental_Scene_h
 
-#include "OpenGL.h"
+#include "libs.h"
 
 #include "MobiusStrip.h"
 #include "Entity.h"

@@ -12,6 +12,7 @@
 		8635004E1A272F9C008C5E66 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8635004D1A272F9C008C5E66 /* OpenGL.framework */; };
 		863500601A273030008C5E66 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8635005D1A273030008C5E66 /* Mesh.cpp */; };
 		863500611A273030008C5E66 /* stb_image.c in Sources */ = {isa = PBXBuildFile; fileRef = 8635005F1A273030008C5E66 /* stb_image.c */; };
+		86700D641A41BC3D006DF920 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86700D631A41BC3D006DF920 /* OpenAL.framework */; };
 		86F8E3561A3661E0008958CA /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 86F8E3551A3661E0008958CA /* README.md */; };
 		86FB6DE61A3F4116006592F6 /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE41A3F4116006592F6 /* Bullet.cpp */; };
 		86FB6DE91A3F4145006592F6 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86FB6DE71A3F4145006592F6 /* Player.cpp */; };
@@ -58,6 +59,8 @@
 		8635005D1A273030008C5E66 /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		8635005E1A273030008C5E66 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		8635005F1A273030008C5E66 /* stb_image.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stb_image.c; sourceTree = "<group>"; };
+		86700D621A41BBA4006DF920 /* mario_rr.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario_rr.mp3; sourceTree = "<group>"; };
+		86700D631A41BC3D006DF920 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		86F8E33D1A35C189008958CA /* chassis.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chassis.obj; sourceTree = "<group>"; };
 		86F8E33E1A35C189008958CA /* chevy.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = chevy.obj; sourceTree = "<group>"; };
 		86F8E33F1A35C189008958CA /* chevy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chevy.png; sourceTree = "<group>"; };
@@ -89,7 +92,7 @@
 		86FB6DED1A3F4203006592F6 /* Wheel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wheel.cpp; sourceTree = "<group>"; };
 		86FB6DEE1A3F4203006592F6 /* Wheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Wheel.h; sourceTree = "<group>"; };
 		86FB6DF01A3F423E006592F6 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
-		86FB6DF21A3F42EC006592F6 /* OpenGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenGL.h; sourceTree = "<group>"; };
+		86FB6DF21A3F42EC006592F6 /* libs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libs.h; sourceTree = "<group>"; };
 		86FB6DF31A3F43E8006592F6 /* MeshEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshEntity.cpp; sourceTree = "<group>"; };
 		86FB6DF51A3F45FF006592F6 /* MobiusStrip.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MobiusStrip.cpp; sourceTree = "<group>"; };
 		86FB6DF71A3F478C006592F6 /* Object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Object.cpp; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86700D641A41BC3D006DF920 /* OpenAL.framework in Frameworks */,
 				8635004E1A272F9C008C5E66 /* OpenGL.framework in Frameworks */,
 				8635004C1A272F97008C5E66 /* GLUT.framework in Frameworks */,
 			);
@@ -128,10 +132,9 @@
 			isa = PBXGroup;
 			children = (
 				86F8E3551A3661E0008958CA /* README.md */,
-				8635004D1A272F9C008C5E66 /* OpenGL.framework */,
-				8635004B1A272F97008C5E66 /* GLUT.framework */,
 				863500431A272F7A008C5E66 /* incremental */,
 				863500421A272F7A008C5E66 /* Products */,
+				86700D651A41BC4B006DF920 /* frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -146,6 +149,7 @@
 		863500431A272F7A008C5E66 /* incremental */ = {
 			isa = PBXGroup;
 			children = (
+				86FB6DF21A3F42EC006592F6 /* libs.h */,
 				863500441A272F7A008C5E66 /* main.cpp */,
 				86FB6DF91A3F4828006592F6 /* Scene.cpp */,
 				8606BD8F1A3081A2004B6C32 /* Scene.h */,
@@ -153,7 +157,7 @@
 				8606BD8E1A306DF2004B6C32 /* Material.h */,
 				8606BD911A30820C004B6C32 /* LightSource.h */,
 				8606BD901A3081EE004B6C32 /* Camera.h */,
-				86FB6DF21A3F42EC006592F6 /* OpenGL.h */,
+				86700D621A41BBA4006DF920 /* mario_rr.mp3 */,
 				8606BD921A30825A004B6C32 /* coordinates */,
 				863500571A273030008C5E66 /* HundredAcreWood */,
 				8635005C1A273030008C5E66 /* MeshTextureTools */,
@@ -184,6 +188,16 @@
 				8635005F1A273030008C5E66 /* stb_image.c */,
 			);
 			path = MeshTextureTools;
+			sourceTree = "<group>";
+		};
+		86700D651A41BC4B006DF920 /* frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				86700D631A41BC3D006DF920 /* OpenAL.framework */,
+				8635004D1A272F9C008C5E66 /* OpenGL.framework */,
+				8635004B1A272F97008C5E66 /* GLUT.framework */,
+			);
+			name = frameworks;
 			sourceTree = "<group>";
 		};
 		86F8E33C1A35C189008958CA /* chevy */ = {
@@ -301,7 +315,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8635003C1A272F7A008C5E66 /* Build configuration list for PBXProject "incremental" */;
+			buildConfigurationList = 8635003C1A272F7A008C5E66 /* Build configuration list for PBXProject "worldsurfer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -437,7 +451,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8635003C1A272F7A008C5E66 /* Build configuration list for PBXProject "incremental" */ = {
+		8635003C1A272F7A008C5E66 /* Build configuration list for PBXProject "worldsurfer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				863500461A272F7A008C5E66 /* Debug */,

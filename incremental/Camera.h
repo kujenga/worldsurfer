@@ -9,7 +9,7 @@
 #ifndef incremental_Camera_h
 #define incremental_Camera_h
 
-#include "OpenGL.h"
+#include "libs.h"
 
 // Skeletal Camera class. Feel free to add custom initialization, set aspect ratio to fit viewport dimensions, or animation.
 class Camera
